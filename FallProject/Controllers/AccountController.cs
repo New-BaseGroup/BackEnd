@@ -18,9 +18,22 @@ namespace API.Controllers
                 //try loging service funktion
 
                 //if service returns true
-                return Ok("login success");
-                // else return Ok("login failed");
-                
+                if(loginDto.user == "admin" && loginDto.password == "adminadmin123!") // temporary check will be service function
+                return Ok(new
+                {
+                    status = "success",
+                    user = loginDto.user
+                });
+                //returns a json objekt with status and user property
+                //always return same format on the object unless an actual error happens
+                else
+                    return Ok(new
+                    {
+                        status = "failure",
+                        user = ""
+                    });
+                // else return Ok("failure");
+
             }
             catch (Exception ex)
             {
