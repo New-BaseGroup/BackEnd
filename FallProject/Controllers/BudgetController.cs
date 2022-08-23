@@ -10,8 +10,8 @@ namespace API.Controllers
     public class BudgetController : ControllerBase
     {
         [AllowAnonymous] //change to autorized when autentication is implemented
-        [HttpGet]
-        public IActionResult GetBudget([FromQuery] BudgetParametersDTO budgetParametersDTO)
+        [HttpPost("GetBudget")]//you should be able to add
+        public IActionResult GetBudget( BudgetParametersDTO budgetParametersDTO)
         {
             try
             {
