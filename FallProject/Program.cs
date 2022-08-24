@@ -1,8 +1,7 @@
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
+using Microsoft.EntityFrameworkCore;
+using DAL.Models;
+using Microsoft.AspNetCore.Identity;
+using System.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,37 +17,20 @@ builder.Services.AddCors(p => p.AddPolicy("corsapp", builder =>
     builder.WithOrigins("*").AllowAnyMethod().AllowAnyHeader();
 }));
 
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(opt =>
-{
-    opt.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
-    {
-        ValidateIssuer = true,
-        ValidateAudience = true,
-        ValidateLifetime = true,
-        ValidateIssuerSigningKey = true,
-        ValidIssuer = builder.Configuration["Jwt:Issuer"],
-        ValidAudience = builder.Configuration["Jwt:Issuer"],//kolla up.
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
-    };
-});
+
+
+builder.Services.AddIdentity<User, IdentityRole>()
+    .AddEntityFrameworkStores<ApplicationContext>();
+builder.Services.AddControllersWithViews();
+
+
+
+
+//builder.UseSqlServer(connectionString).UseLazyLoadingProxies();
+
 
 var app = builder.Build();
-app.Use(async (context, next) =>
-{
-    // you could get from token or get from session. 
-    string token = context.Request.Headers["Authorization"];
-    if (!string.IsNullOrEmpty(token))
-    {
-        var tok = token.Replace("Bearer ", "");
-        var jwttoken = new JwtSecurityTokenHandler().ReadJwtToken(tok);
 
-        var jti = jwttoken.Claims.First(claim => claim.Type == ClaimTypes.Name).Value;
-        context.Items.Add("Username", jti);
-    }
-
-    await next();
-
-});
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
