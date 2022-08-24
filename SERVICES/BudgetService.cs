@@ -45,10 +45,10 @@ namespace SERVICES
                 Description = Description,
                 BudgetCategories = new List<BudgetCategory> { BudgetCategories }
             };
-
             using (var db = new BudgetContext())
             {
-                db.Budgets.Add(budget);
+                var UserBudget = db.Users.First(u => u.UserID == UserId).Budgets;
+                UserBudget.Add(budget);
                 db.SaveChanges();
             }
         }
