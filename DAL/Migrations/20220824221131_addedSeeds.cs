@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DAL.Migrations
 {
-    public partial class test5 : Migration
+    public partial class addedSeeds : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -43,7 +43,7 @@ namespace DAL.Migrations
                 {
                     BudgetID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     TotalAmount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     EndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -109,6 +109,64 @@ namespace DAL.Migrations
                         principalColumn: "BudgetCategoryID");
                 });
 
+            migrationBuilder.InsertData(
+                table: "Categories",
+                columns: new[] { "CategoryID", "Name" },
+                values: new object[,]
+                {
+                    { 1, "Food" },
+                    { 2, "Fuel" },
+                    { 3, "Clothes" },
+                    { 4, "Furniture" },
+                    { 5, "House" },
+                    { 6, "NotHouse" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Users",
+                columns: new[] { "UserID", "Email", "Password", "Username" },
+                values: new object[,]
+                {
+                    { 1, "Adam@gmail.com", "qwerty123", "Adam" },
+                    { 2, "Kim@gmail.com", "qwerty123", "Kim" },
+                    { 3, "Omar@gmail.com", "qwerty123", "Omar" },
+                    { 4, "Ahmad@gmail.com", "qwerty123", "Ahmad" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Budgets",
+                columns: new[] { "BudgetID", "Description", "EndDate", "Name", "StartDate", "TotalAmount", "UserID" },
+                values: new object[,]
+                {
+                    { 1, null, new DateTime(2022, 4, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "budgetNr1", new DateTime(2022, 4, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), 6000m, 1 },
+                    { 2, null, new DateTime(2022, 4, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "budgetNr2", new DateTime(2022, 4, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), 6000m, 1 },
+                    { 3, null, new DateTime(2022, 4, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "budgetNr1", new DateTime(2022, 4, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), 6000m, 2 },
+                    { 4, null, new DateTime(2022, 4, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "budgetNr2", new DateTime(2022, 4, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), 6000m, 2 },
+                    { 5, null, new DateTime(2022, 4, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "budgetNr1", new DateTime(2022, 4, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), 6000m, 3 },
+                    { 6, null, new DateTime(2022, 4, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "budgetNr2", new DateTime(2022, 4, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), 6000m, 3 },
+                    { 7, null, new DateTime(2022, 4, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "budgetNr1", new DateTime(2022, 4, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), 6000m, 4 },
+                    { 8, null, new DateTime(2022, 4, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "budgetNr2", new DateTime(2022, 4, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), 6000m, 4 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "BudgetCategories",
+                columns: new[] { "BudgetCategoryID", "BudgetID", "CategoryID", "CustomName", "MaxAmount" },
+                values: new object[,]
+                {
+                    { 1, 1, 1, "BudgetCategory1", 10 },
+                    { 2, 2, 2, "BudgetCategory2", 10 },
+                    { 3, 3, 3, "BudgetCategory3", 10 },
+                    { 4, 4, 4, "BudgetCategory4", 10 },
+                    { 5, 5, 5, "BudgetCategory5", 10 },
+                    { 6, 6, 1, "BudgetCategory6", 10 },
+                    { 7, 7, 2, "BudgetCategory7", 10 },
+                    { 8, 8, 3, "BudgetCategory8", 10 },
+                    { 9, 1, 4, "BudgetCategory9", 10 },
+                    { 10, 2, 5, "BudgetCategory10", 10 },
+                    { 11, 3, 6, "BudgetCategory11", 10 },
+                    { 12, 4, 6, "BudgetCategory12", 10 }
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_BudgetCategories_BudgetID",
                 table: "BudgetCategories",
@@ -118,12 +176,6 @@ namespace DAL.Migrations
                 name: "IX_BudgetCategories_CategoryID",
                 table: "BudgetCategories",
                 column: "CategoryID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Budgets_Name",
-                table: "Budgets",
-                column: "Name",
-                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Budgets_UserID",

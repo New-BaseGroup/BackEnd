@@ -30,7 +30,6 @@ namespace DAL
             
             modelBuilder.Entity<User>().HasIndex(u=>u.Username).IsUnique();
             modelBuilder.Entity<User>().HasIndex(u=>u.Email).IsUnique();
-            modelBuilder.Entity<Budget>().HasIndex(u=>u.Name).IsUnique();
             modelBuilder.Entity<Category>().HasIndex(u=>u.Name).IsUnique();
             modelBuilder.Seed();
 
