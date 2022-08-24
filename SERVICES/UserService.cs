@@ -32,10 +32,10 @@ namespace SERVICES
                 using (var context = new BudgetContext())
                 {
                     //implement when db is up and runing
-                    //var findUser = context.Users.First(a => a.user == user);
-                    //var hash = findUser.Password
-                    var hash = "";
-                    //var hashedPassword = PasswordHasher.Hash(password);
+                    var findUser = context.Users.First(a => a.Username == user);
+                    var hash = findUser.Password;
+                    
+
                     //hash should be the users stored hashed password
                     //var result = PasswordHasher.VerifyHashedPassword(userPass, pass);
                     return true;
