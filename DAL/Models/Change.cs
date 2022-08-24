@@ -11,7 +11,7 @@ namespace DAL.Models
 {
     public class Change
     {
-        [Key]
+        
         public int ChangeID { get; set; }
         public string Title { get; set; }
 
@@ -20,6 +20,5 @@ namespace DAL.Models
         public decimal Amount { get; set; }
         public DateTime Date { get; set; }
         public string? Description { get; set; }
-        public virtual ICollection<BudgetCategory> Budits { get; set; }
     }
 }

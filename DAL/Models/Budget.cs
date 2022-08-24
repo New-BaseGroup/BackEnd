@@ -19,8 +19,6 @@ namespace DAL.Models
         public DateTime StartDate { get; set; }/* = DateTime.Now;*/
         public DateTime EndDate { get; set; }
         public string? Description { get; set; }
-        public int UserID { get; set; }
-        public virtual User User { get; set; }
         public virtual ICollection<BudgetCategory> BudgetCategories { get; set;}
 
     }

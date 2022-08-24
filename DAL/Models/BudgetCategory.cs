@@ -11,11 +11,7 @@ namespace DAL.Models
         public int BudgetCategoryID { get; set; }
         public string CustomName { get; set; }
         public int MaxAmount { get; set; }
-        public int CategoryId { get; set; }
         public virtual Category Category { get; set; }
-        public int BudgetId { get; set; }
-        public virtual Budget Budget { get; set; }
-        public virtual ICollection<Change> Changes { get; set; }
-
+        public virtual ICollection<Change>? Changes { get; set; }
     }
 }

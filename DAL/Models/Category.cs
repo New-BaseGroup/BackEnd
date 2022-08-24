@@ -10,6 +10,5 @@ namespace DAL.Models
     {
         public int CategoryID { get; set; }
         public string Name { get; set; }
-        public virtual ICollection<BudgetCategory> BudgetCategories { get; set;}
     }
 }
