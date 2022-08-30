@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DAL.Migrations
 {
     [DbContext(typeof(BudgetContext))]
-    [Migration("20220829165435_first try")]
-    partial class firsttry
+    [Migration("20220830093658_new seed")]
+    partial class newseed
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -61,73 +61,73 @@ namespace DAL.Migrations
                         new
                         {
                             BudgetID = 1,
-                            EndDate = new DateTime(2022, 4, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EndDate = new DateTime(2022, 9, 19, 11, 36, 58, 100, DateTimeKind.Local).AddTicks(8297),
                             Name = "budgetNr1",
-                            StartDate = new DateTime(2022, 4, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            TotalAmount = 6000m,
+                            StartDate = new DateTime(2022, 8, 20, 11, 36, 58, 100, DateTimeKind.Local).AddTicks(8267),
+                            TotalAmount = 40000m,
                             UserID = 1
                         },
                         new
                         {
                             BudgetID = 2,
-                            EndDate = new DateTime(2022, 4, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EndDate = new DateTime(2022, 9, 19, 11, 36, 58, 100, DateTimeKind.Local).AddTicks(8302),
                             Name = "budgetNr2",
-                            StartDate = new DateTime(2022, 4, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            TotalAmount = 6000m,
+                            StartDate = new DateTime(2022, 8, 20, 11, 36, 58, 100, DateTimeKind.Local).AddTicks(8300),
+                            TotalAmount = 20000m,
                             UserID = 1
                         },
                         new
                         {
                             BudgetID = 3,
-                            EndDate = new DateTime(2022, 4, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EndDate = new DateTime(2022, 9, 19, 11, 36, 58, 100, DateTimeKind.Local).AddTicks(8305),
                             Name = "budgetNr1",
-                            StartDate = new DateTime(2022, 4, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            TotalAmount = 6000m,
+                            StartDate = new DateTime(2022, 8, 20, 11, 36, 58, 100, DateTimeKind.Local).AddTicks(8304),
+                            TotalAmount = 10000m,
                             UserID = 2
                         },
                         new
                         {
                             BudgetID = 4,
-                            EndDate = new DateTime(2022, 4, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EndDate = new DateTime(2022, 9, 19, 11, 36, 58, 100, DateTimeKind.Local).AddTicks(8308),
                             Name = "budgetNr2",
-                            StartDate = new DateTime(2022, 4, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            TotalAmount = 6000m,
+                            StartDate = new DateTime(2022, 8, 20, 11, 36, 58, 100, DateTimeKind.Local).AddTicks(8306),
+                            TotalAmount = 10000m,
                             UserID = 2
                         },
                         new
                         {
                             BudgetID = 5,
-                            EndDate = new DateTime(2022, 4, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EndDate = new DateTime(2022, 9, 19, 11, 36, 58, 100, DateTimeKind.Local).AddTicks(8311),
                             Name = "budgetNr1",
-                            StartDate = new DateTime(2022, 4, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            TotalAmount = 6000m,
+                            StartDate = new DateTime(2022, 8, 20, 11, 36, 58, 100, DateTimeKind.Local).AddTicks(8310),
+                            TotalAmount = 10000m,
                             UserID = 3
                         },
                         new
                         {
                             BudgetID = 6,
-                            EndDate = new DateTime(2022, 4, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EndDate = new DateTime(2022, 9, 19, 11, 36, 58, 100, DateTimeKind.Local).AddTicks(8314),
                             Name = "budgetNr2",
-                            StartDate = new DateTime(2022, 4, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            TotalAmount = 6000m,
+                            StartDate = new DateTime(2022, 8, 20, 11, 36, 58, 100, DateTimeKind.Local).AddTicks(8313),
+                            TotalAmount = 10000m,
                             UserID = 3
                         },
                         new
                         {
                             BudgetID = 7,
-                            EndDate = new DateTime(2022, 4, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EndDate = new DateTime(2022, 9, 19, 11, 36, 58, 100, DateTimeKind.Local).AddTicks(8317),
                             Name = "budgetNr1",
-                            StartDate = new DateTime(2022, 4, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            TotalAmount = 6000m,
+                            StartDate = new DateTime(2022, 8, 20, 11, 36, 58, 100, DateTimeKind.Local).AddTicks(8316),
+                            TotalAmount = 10000m,
                             UserID = 4
                         },
                         new
                         {
                             BudgetID = 8,
-                            EndDate = new DateTime(2022, 4, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EndDate = new DateTime(2022, 9, 19, 11, 36, 58, 100, DateTimeKind.Local).AddTicks(8320),
                             Name = "budgetNr2",
-                            StartDate = new DateTime(2022, 4, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            TotalAmount = 6000m,
+                            StartDate = new DateTime(2022, 8, 20, 11, 36, 58, 100, DateTimeKind.Local).AddTicks(8319),
+                            TotalAmount = 10000m,
                             UserID = 4
                         });
                 });
@@ -168,95 +168,95 @@ namespace DAL.Migrations
                             BudgetID = 1,
                             CategoryID = 1,
                             CustomName = "BudgetCategory1",
-                            MaxAmount = 10
+                            MaxAmount = 10000
                         },
                         new
                         {
                             BudgetCategoryID = 2,
-                            BudgetID = 2,
+                            BudgetID = 1,
                             CategoryID = 2,
                             CustomName = "BudgetCategory2",
-                            MaxAmount = 10
+                            MaxAmount = 10000
                         },
                         new
                         {
                             BudgetCategoryID = 3,
-                            BudgetID = 3,
+                            BudgetID = 1,
                             CategoryID = 3,
                             CustomName = "BudgetCategory3",
-                            MaxAmount = 10
+                            MaxAmount = 10000
                         },
                         new
                         {
                             BudgetCategoryID = 4,
-                            BudgetID = 4,
+                            BudgetID = 1,
                             CategoryID = 4,
                             CustomName = "BudgetCategory4",
-                            MaxAmount = 10
+                            MaxAmount = 10000
                         },
                         new
                         {
                             BudgetCategoryID = 5,
-                            BudgetID = 5,
+                            BudgetID = 2,
                             CategoryID = 5,
                             CustomName = "BudgetCategory5",
-                            MaxAmount = 10
+                            MaxAmount = 10000
                         },
                         new
                         {
                             BudgetCategoryID = 6,
-                            BudgetID = 6,
+                            BudgetID = 2,
                             CategoryID = 1,
                             CustomName = "BudgetCategory6",
-                            MaxAmount = 10
+                            MaxAmount = 10000
                         },
                         new
                         {
                             BudgetCategoryID = 7,
-                            BudgetID = 7,
+                            BudgetID = 3,
                             CategoryID = 2,
                             CustomName = "BudgetCategory7",
-                            MaxAmount = 10
+                            MaxAmount = 10000
                         },
                         new
                         {
                             BudgetCategoryID = 8,
-                            BudgetID = 8,
+                            BudgetID = 4,
                             CategoryID = 3,
                             CustomName = "BudgetCategory8",
-                            MaxAmount = 10
+                            MaxAmount = 10000
                         },
                         new
                         {
                             BudgetCategoryID = 9,
-                            BudgetID = 1,
+                            BudgetID = 5,
                             CategoryID = 4,
                             CustomName = "BudgetCategory9",
-                            MaxAmount = 10
+                            MaxAmount = 10000
                         },
                         new
                         {
                             BudgetCategoryID = 10,
-                            BudgetID = 2,
+                            BudgetID = 6,
                             CategoryID = 5,
                             CustomName = "BudgetCategory10",
-                            MaxAmount = 10
+                            MaxAmount = 10000
                         },
                         new
                         {
                             BudgetCategoryID = 11,
-                            BudgetID = 3,
+                            BudgetID = 7,
                             CategoryID = 6,
                             CustomName = "BudgetCategory11",
-                            MaxAmount = 10
+                            MaxAmount = 10000
                         },
                         new
                         {
                             BudgetCategoryID = 12,
-                            BudgetID = 4,
+                            BudgetID = 8,
                             CategoryID = 6,
                             CustomName = "BudgetCategory12",
-                            MaxAmount = 10
+                            MaxAmount = 10000
                         });
                 });
 
@@ -320,8 +320,8 @@ namespace DAL.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ChangeID"), 1L, 1);
 
-                    b.Property<decimal>("Amount")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<int>("Amount")
+                        .HasColumnType("int");
 
                     b.Property<int?>("BudgetCategoryID")
                         .HasColumnType("int");
@@ -341,6 +341,116 @@ namespace DAL.Migrations
                     b.HasIndex("BudgetCategoryID");
 
                     b.ToTable("Changes");
+
+                    b.HasData(
+                        new
+                        {
+                            ChangeID = 1,
+                            Amount = 11000,
+                            BudgetCategoryID = 1,
+                            Date = new DateTime(2022, 8, 30, 11, 36, 58, 100, DateTimeKind.Local).AddTicks(8393),
+                            Description = "test Description 1",
+                            Title = "income test test1"
+                        },
+                        new
+                        {
+                            ChangeID = 2,
+                            Amount = -2000,
+                            BudgetCategoryID = 1,
+                            Date = new DateTime(2022, 8, 30, 11, 36, 58, 100, DateTimeKind.Local).AddTicks(8396),
+                            Description = "test Description 1",
+                            Title = "income test test2"
+                        },
+                        new
+                        {
+                            ChangeID = 3,
+                            Amount = 30000,
+                            BudgetCategoryID = 2,
+                            Date = new DateTime(2022, 8, 30, 11, 36, 58, 100, DateTimeKind.Local).AddTicks(8398),
+                            Description = "test Description 1",
+                            Title = "income test test3"
+                        },
+                        new
+                        {
+                            ChangeID = 4,
+                            Amount = -1000,
+                            BudgetCategoryID = 2,
+                            Date = new DateTime(2022, 8, 30, 11, 36, 58, 100, DateTimeKind.Local).AddTicks(8399),
+                            Description = "test Description 1",
+                            Title = "income test test4"
+                        },
+                        new
+                        {
+                            ChangeID = 5,
+                            Amount = -2000,
+                            BudgetCategoryID = 3,
+                            Date = new DateTime(2022, 8, 30, 11, 36, 58, 100, DateTimeKind.Local).AddTicks(8400),
+                            Description = "test Description 1",
+                            Title = "income test test5"
+                        },
+                        new
+                        {
+                            ChangeID = 6,
+                            Amount = -3000,
+                            BudgetCategoryID = 4,
+                            Date = new DateTime(2022, 8, 30, 11, 36, 58, 100, DateTimeKind.Local).AddTicks(8402),
+                            Description = "test Description 1",
+                            Title = "income test test6"
+                        },
+                        new
+                        {
+                            ChangeID = 7,
+                            Amount = -3000,
+                            BudgetCategoryID = 5,
+                            Date = new DateTime(2022, 8, 30, 11, 36, 58, 100, DateTimeKind.Local).AddTicks(8403),
+                            Description = "test Description 1",
+                            Title = "income test test7"
+                        },
+                        new
+                        {
+                            ChangeID = 8,
+                            Amount = -3000,
+                            BudgetCategoryID = 6,
+                            Date = new DateTime(2022, 8, 30, 11, 36, 58, 100, DateTimeKind.Local).AddTicks(8405),
+                            Description = "test Description 1",
+                            Title = "income test test8"
+                        },
+                        new
+                        {
+                            ChangeID = 9,
+                            Amount = -3000,
+                            BudgetCategoryID = 7,
+                            Date = new DateTime(2022, 8, 30, 11, 36, 58, 100, DateTimeKind.Local).AddTicks(8406),
+                            Description = "test Description 1",
+                            Title = "income test test9"
+                        },
+                        new
+                        {
+                            ChangeID = 10,
+                            Amount = -3000,
+                            BudgetCategoryID = 8,
+                            Date = new DateTime(2022, 8, 30, 11, 36, 58, 100, DateTimeKind.Local).AddTicks(8407),
+                            Description = "test Description 1",
+                            Title = "income test test10"
+                        },
+                        new
+                        {
+                            ChangeID = 11,
+                            Amount = -3000,
+                            BudgetCategoryID = 3,
+                            Date = new DateTime(2022, 8, 30, 11, 36, 58, 100, DateTimeKind.Local).AddTicks(8409),
+                            Description = "test Description 1",
+                            Title = "income test test11"
+                        },
+                        new
+                        {
+                            ChangeID = 12,
+                            Amount = -3000,
+                            BudgetCategoryID = 3,
+                            Date = new DateTime(2022, 8, 30, 11, 36, 58, 100, DateTimeKind.Local).AddTicks(8410),
+                            Description = "test Description 1",
+                            Title = "income test test12"
+                        });
                 });
 
             modelBuilder.Entity("DAL.Models.User", b =>
@@ -358,8 +468,8 @@ namespace DAL.Migrations
 
                     b.Property<string>("Password")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
 
                     b.Property<string>("Username")
                         .IsRequired()
@@ -381,28 +491,28 @@ namespace DAL.Migrations
                         {
                             UserID = 1,
                             Email = "Adam@gmail.com",
-                            Password = "qwerty123",
+                            Password = "0XepCVJtI65/eqjMxKR9s/4l0ENjank3fVdkrXghTC0=@TPS8UlUWVKfcpQuE1jXDOg==",
                             Username = "Adam"
                         },
                         new
                         {
                             UserID = 2,
                             Email = "Kim@gmail.com",
-                            Password = "qwerty123",
+                            Password = "0XepCVJtI65/eqjMxKR9s/4l0ENjank3fVdkrXghTC0=@TPS8UlUWVKfcpQuE1jXDOg==",
                             Username = "Kim"
                         },
                         new
                         {
                             UserID = 3,
                             Email = "Omar@gmail.com",
-                            Password = "qwerty123",
+                            Password = "0XepCVJtI65/eqjMxKR9s/4l0ENjank3fVdkrXghTC0=@TPS8UlUWVKfcpQuE1jXDOg==",
                             Username = "Omar"
                         },
                         new
                         {
                             UserID = 4,
                             Email = "Ahmad@gmail.com",
-                            Password = "qwerty123",
+                            Password = "0XepCVJtI65/eqjMxKR9s/4l0ENjank3fVdkrXghTC0=@TPS8UlUWVKfcpQuE1jXDOg==",
                             Username = "Ahmad"
                         });
                 });

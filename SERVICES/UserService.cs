@@ -52,8 +52,8 @@ namespace SERVICES
         }
         public bool RegisterNewAccount(RegisterUserDTO newUser)
         {
-            try
-            {
+            //try
+            //{
                 using (var context = new BudgetContext())
                 {
 
@@ -61,27 +61,31 @@ namespace SERVICES
                     Match match = Regex.Match(newUser.Email, emailString);
 
                     
-                    var findUser = context.Users.First(a => a.Username == newUser.User);
+                    var findUser = context.Users.FirstOrDefault(a => a.Username == newUser.User || a.Email == newUser.Email);
                     if (findUser != null)
-                        return false;
+                    {
+                    Console.WriteLine("wtf");
+                    return false;
+                    }
 
                     if (match.Success)
                     {
                         var safePassword = PasswordHasherService.Hash(newUser.Password);
                         var user = new User() { Username = newUser.User, Password = safePassword, Email = newUser.Email };
-                        context.Add(user);
+                        context.Users.Add(user);
                         context.SaveChanges();
                         return true;
                     }
-                    return true;
+                    return false;
 
                 }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                return false;
-            }
+            //}
+            //catch (Exception ex)
+            //{
+            //    Console.WriteLine("service");
+            //    Console.WriteLine(ex.Message);
+            //    return false;
+            //}
         }
     }
 }
