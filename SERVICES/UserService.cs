@@ -1,12 +1,8 @@
 ﻿using DAL;
 using DAL.Models;
-using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using SERVICES.DTO;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
+
 
 namespace SERVICES
 {
@@ -26,18 +22,18 @@ namespace SERVICES
         }
         private UserService() { }
 
-        public bool Login(string user, string password)
+        public bool Login(LoginDTO userInputs)
         {
             try
             {
-                if (user != null && password != null)
+                if (userInputs.User != null && userInputs.Password != null)
                 {
                     using (var context = new BudgetContext())
                     {
 
-                        var findUser = context.Users.First(a => a.Username == user);
+                        var findUser = context.Users.First(a => a.Username == userInputs.User);
                         var hashedPassword = findUser.Password;
-                        if (PasswordHasherService.VerifyPassword(password, hashedPassword))
+                        if (PasswordHasherService.VerifyPassword(userInputs.Password, hashedPassword))
                             return true;
                         else
                             return false;
@@ -54,38 +50,42 @@ namespace SERVICES
                 return false;
             }
         }
-        public bool RegisterNewAccount(string userName, string password, string mail)
+        public bool RegisterNewAccount(RegisterUserDTO newUser)
         {
-            try
-            {
+            //try
+            //{
                 using (var context = new BudgetContext())
                 {
 
                     var emailString = @"^[\w-_]+(\.[\w!#$%'*+\/=?\^`{|}]+)*@((([\-\w]+\.)+[a-zA-Z]{2,20})|(([0-9]{1,3}\.){3}[0-9]{1,3}))$";
-                    Match match = Regex.Match(mail, emailString);
+                    Match match = Regex.Match(newUser.Email, emailString);
 
                     
-                    var findUser = context.Users.First(a => a.Username == userName);
+                    var findUser = context.Users.FirstOrDefault(a => a.Username == newUser.User || a.Email == newUser.Email);
                     if (findUser != null)
-                        return false;
+                    {
+                    Console.WriteLine("wtf");
+                    return false;
+                    }
 
                     if (match.Success)
                     {
-                        var safePassword = PasswordHasherService.Hash(password);
-                        var newUser = new User() { Username = userName, Password = safePassword, Email = mail };
-                        context.Add(newUser);
+                        var safePassword = PasswordHasherService.Hash(newUser.Password);
+                        var user = new User() { Username = newUser.User, Password = safePassword, Email = newUser.Email };
+                        context.Users.Add(user);
                         context.SaveChanges();
                         return true;
                     }
-                    return true;
+                    return false;
 
                 }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                return false;
-            }
+            //}
+            //catch (Exception ex)
+            //{
+            //    Console.WriteLine("service");
+            //    Console.WriteLine(ex.Message);
+            //    return false;
+            //}
         }
     }
 }

@@ -1,11 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
-namespace API.DTO
+namespace SERVICES.DTO
 {
-    public record CreateBudgetDTO
+    public record BudgetDTO
     {
-
+        public int BudgetID { get; set; }
         [Required]
-        public string BudgetName { get; set; }
+        public string Name { get; set; }
 
 
         [Required]
@@ -15,13 +15,11 @@ namespace API.DTO
         [Required]
         public DateTime EndDate { get; init; }
 
-        public string Description { get; init; }
+        public string? Description { get; init; }
+
 
         [Required]
-        public int UserId { get; set; }
-
-        [Required]
-        public Dictionary<int, BudgetCategoriesDTO> BudgetCategories{ get; init;}
+        public List<BudgetCategoriesDTO> BudgetCategories { get; init;}
     }
 }
  

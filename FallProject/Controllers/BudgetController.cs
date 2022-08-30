@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
-using API.DTO;
+using SERVICES.DTO;
+using SERVICES;
 
 namespace API.Controllers
 {
@@ -42,25 +43,25 @@ namespace API.Controllers
         {
             try
             {
-                var budget = "";
-                //var budget = "temp: service.GetBudgetById(id);";
-                //IsEmptyObject
-                if (budget == "")
-                {
-                    return NotFound(new
-                    {
-                        status = "failed",
-                        message = "not found"
-                    });
                 
-                }
-                else 
-
+               var budget = BudgetService.Instance.GetBudgetById(id);
+                //IsEmptyObject
+                if (budget != null)
+                {
                     return Ok(new
                     {
                         status = "success",
                         message = budget
                     });
+
+                }
+                else
+                    return NotFound(new
+                    {
+                        status = "failed",
+                        message = "not found"
+                    });
+               
 
               
 
@@ -78,8 +79,8 @@ namespace API.Controllers
         {
             try
             { //service need to be added.
-                //BudgetSErvice.Instance.AddBudget(budget.BudgetName , budget.TotalAmount , budget.StartDate, budget.EndDate , budget.Description , budget,UserId , budget.BudgetCategories);
-               if(budget.BudgetName != "adam")
+                var result = BudgetService.Instance.CreateBudget(budget);
+               if(result)
                     return Ok(new
                     {
                         status = "success",

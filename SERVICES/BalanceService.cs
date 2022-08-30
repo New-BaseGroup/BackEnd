@@ -1,5 +1,6 @@
 ﻿using DAL;
 using DAL.Models;
+using SERVICES.DTO;
 
 namespace SERVICES
 {
@@ -30,33 +31,65 @@ namespace SERVICES
         {
             using (var db = new BudgetContext())
             {
+                
                 var change = db.Changes.Find(ChangeID);
                 return change;
             }
         }
-        public void AddChange(int BudgetCategoryID, int Amount, string Title, string Description, DateTime Date)
+        public bool AddChange(BalanceChangeDTO balanceChange)
         {
+            try
+            {
+
+            
             var change = new Change()
             {
-                Title = Title,
-                Description = Description,
-                Amount = Amount,
-                Date = Date
+                Title = balanceChange.Title,
+                Amount = balanceChange.Amount,
+                Date = balanceChange.Date,
+                Description = balanceChange.Description,
             };
             using (var db = new BudgetContext())
             {
-                var budgetCategory = db.BudgetCategories.First(u => u.BudgetCategoryID == BudgetCategoryID).Changes;
-                budgetCategory.Add(change);
-                db.SaveChanges();
+
+                    var budgetCategoriesDB = db.BudgetCategories.First(g => g.BudgetCategoryID == balanceChange.BudgetCategoryID);
+                    
+                    if (budgetCategoriesDB != null)
+                    {
+                        budgetCategoriesDB.Changes.Add(change);
+                        db.SaveChanges();
+                        return true;
+                    }
+                    Console.WriteLine("test2");
+                    return false;
+            }
+                Console.WriteLine("test3");
+                return false;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
             }
         }
-        public void DeleteChange(int ChangeID)
+        public bool DeleteChange(int ChangeID)
         {
-            using (var db = new BudgetContext())
+            try 
             {
-                var change = db.Changes.Find(ChangeID);
-                db.Changes.Remove(change);
-                db.SaveChanges();
+                using (var db = new BudgetContext())
+                {
+                    var change = db.Changes.Find(ChangeID);
+                    db.Changes.Remove(change);
+                    db.SaveChanges();
+                    return true;
+                }
+                return false;
+
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
             }
         }
     }

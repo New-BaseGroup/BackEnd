@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
-namespace API.DTO
+namespace SERVICES.DTO
 {
-    public record RegisterUserDTO
+    public record LoginDTO
     {
 
         [Required(ErrorMessage = "{0} is a mandatory field")]
@@ -10,9 +10,6 @@ namespace API.DTO
 
         [Required(ErrorMessage = "{0} is a mandatory field")] 
         public string Password { get; init; }
-
-        [Required(ErrorMessage = "{0} is a mandatory field")]
-        public string Email { get; init; }
 
     }
 }

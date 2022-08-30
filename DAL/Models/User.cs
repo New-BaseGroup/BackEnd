@@ -18,7 +18,7 @@ namespace DAL.Models
         [StringLength(50, MinimumLength = 1)]
         public string Username { get; set; }
 
-        [StringLength(50, MinimumLength = 1)]
+        [StringLength(150, MinimumLength = 1)]
         public string Password { get; set; }
         public virtual ICollection<Budget>? Budgets { get; set; }
 

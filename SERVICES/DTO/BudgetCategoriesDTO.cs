@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
-namespace API.DTO
+using DAL.Models;
+namespace SERVICES.DTO
 {
     public class BudgetCategoriesDTO
     {
@@ -11,6 +12,7 @@ namespace API.DTO
         [Required]
         public int MaxAmount { get; init; }
 
+        public List<Change>? BalanceChanges { get; set; }
     }
 }
  

@@ -1,5 +1,7 @@
 ﻿using DAL;
 using DAL.Models;
+using SERVICES.DTO;
+using SERVICES;
 
 namespace SERVICES
 {
@@ -26,31 +28,68 @@ namespace SERVICES
                 return budgets;
             }
         }
-        public Budget Findbudget(int budgetID)
+        public BudgetDTO GetBudgetById(int budgetID)
         {
             using (var db = new BudgetContext())
             {
-                var budget = db.Budgets.Find(budgetID);
-                return budget;
+                var budget = db.Budgets.First(b => b.BudgetID == budgetID);
+                var budgetCategories = new List<BudgetCategoriesDTO>();
+                foreach (var item in budget.BudgetCategories)
+                {
+                    
+                    budgetCategories.Add(new BudgetCategoriesDTO() { CatergoriID = item.Category.CategoryID, CustomName = item.CustomName, MaxAmount = item.MaxAmount,BalanceChanges = item.Changes.ToList() });
+                }
+
+                var foundBudget = new BudgetDTO()
+                {
+                    BudgetID = budget.BudgetID,
+                    Name = budget.Name,
+                    TotalAmount = budget.TotalAmount,
+                    StartDate = budget.StartDate,
+                    EndDate = budget.EndDate,
+                    Description = budget.Description,
+                    BudgetCategories = budgetCategories,
+                };
+                return foundBudget;
+               
             }
         }
-        public void CreateBudget(string BudgetName, int TotalAmount, DateTime StartDate, DateTime EndDate, string Description, int UserId, BudgetCategory BudgetCategories)
+        public bool CreateBudget(CreateBudgetDTO inputBudget)
         {
-            var budget = new Budget()
-            {
-                Name = BudgetName,
-                TotalAmount = TotalAmount,
-                StartDate = StartDate,
-                EndDate = EndDate,
-                Description = Description,
-                BudgetCategories = new List<BudgetCategory> { BudgetCategories }
-            };
-            using (var db = new BudgetContext())
-            {
-                var UserBudget = db.Users.First(u => u.UserID == UserId).Budgets;
-                UserBudget.Add(budget);
-                db.SaveChanges();
+            try
+                {
+                using (var db = new BudgetContext())
+                {
+                    var BudgetCategoriesList = new List<BudgetCategory>();
+                    foreach (var item in inputBudget.BudgetCategories)
+                    {
+                        BudgetCategoriesList.Add(new BudgetCategory() { CustomName = item.CustomName, MaxAmount = item.MaxAmount, Category = db.Categories.First(c => c.CategoryID == item.CatergoriID) });
+                    }
+                    var budget = new Budget()
+                    {
+                        Name = inputBudget.BudgetName,
+                        TotalAmount = inputBudget.TotalAmount,
+                        StartDate = inputBudget.StartDate,
+                        EndDate = inputBudget.EndDate,
+                        Description = inputBudget.Description,
+                        BudgetCategories = BudgetCategoriesList
+                    };
+
+                    var UserBudget = db.Users.First(u => u.UserID == inputBudget.UserId).Budgets;
+                    
+                    UserBudget.Add(budget);
+                    db.SaveChanges();
+                    return true;
+                }
+                return false;
+
             }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+           
         }
         public void UpdateBudget(int? budgetID, string? BudgetName, int TotalAmount, DateTime StartDate, DateTime EndDate, string? Description)
         {

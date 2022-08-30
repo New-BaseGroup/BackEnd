@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
-using API.DTO;
+using SERVICES.DTO;
 using SERVICES;
 
 namespace API.Controllers
@@ -14,32 +14,32 @@ namespace API.Controllers
         [HttpPost("login")]
         public IActionResult Login(LoginDTO loginDTO)
         {
+
+            //try loging service funktion
             try
             {
-                //try loging service funktion
 
+            
                 //if service returns true
-                if (UserService.Instance.Login(loginDTO.User, loginDTO.Password)) // temporary check will be service function
-                    return Ok(new
-                    {
-                        status = "success",
-                        message = loginDTO.User
-                    });
-                //returns a json objekt with status and user property
-                //always return same format on the object unless an actual error happens
-                else
-                    return Ok(new
-                    {
-                        status = "failure",
-                        message = "wrong password or username"
-                    });
-                // else return Ok("failure");
-
-            }
-            catch (Exception ex)
+                if (UserService.Instance.Login(loginDTO)) // temporary check will be service function
+                return Ok(new
+                {
+                    status = "success",
+                    message = loginDTO.User
+                });
+            //returns a json objekt with status and user property
+            //always return same format on the object unless an actual error happens
+            else
+                return Ok(new
+                {
+                    status = "failure",
+                    message = "wrong password or username"
+                });
+            // else return Ok("failure");
+             }
+             catch (Exception ex)
             {
-                //only activates on real errors
-                return BadRequest(ex.Message);
+                return BadRequest(ex);
             }
         }
 
@@ -47,9 +47,9 @@ namespace API.Controllers
         [HttpPost("register")]
         public IActionResult Register(RegisterUserDTO registerUserDTO)
         {
-            try
-            {
-                if (UserService.Instance.RegisterNewAccount(registerUserDTO.User, registerUserDTO.Password, registerUserDTO.Email)) // temporary check if user is registered already  will  be a service function
+            //try
+            //{
+                if (UserService.Instance.RegisterNewAccount(registerUserDTO)) // temporary check if user is registered already  will  be a service function
                     return Ok(new
                     {
                         status = "success",
@@ -63,12 +63,12 @@ namespace API.Controllers
                         message = "Username or email is already used"
                     });
 
-            }
-            catch (Exception ex)
-            {
-                //only activates on real errors
-                return BadRequest(ex.Message);
-            }
+            //}
+            //catch (Exception ex)
+            //{
+            //    //only activates on real errors
+            //    return BadRequest(ex.Message);
+            //}
         }
 
         [AllowAnonymous]
@@ -76,7 +76,7 @@ namespace API.Controllers
         public IActionResult Recover(NewPasswordDTO newPasswordDTO)
         {
             try
-            {
+            {  //recovery function not implemented in service yet.
                 if(newPasswordDTO.Password != "hej") // temporary check if user is registered already  will  be a service function
                     return Ok(new
                     {
