@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
-using API.DTO;
+using SERVICES.DTO;
+using SERVICES;
 
 namespace API.Controllers
 {
@@ -11,13 +12,12 @@ namespace API.Controllers
     {
         [AllowAnonymous]  //change to autorized once that is implemented
         [HttpGet]
-        public IActionResult GetBalanceChange(int id)
+        public IActionResult GetBalanceChange(int id) // get income or expense based on its id
         {
             try
             {
                 // will work once service is aded
-                //var result = balanceService.Instance.GetBalanceChange(id);
-                BalanceChangeDTO result = null; 
+                var result = BalanceService.Instance.GetBalanceChange(id);
 
                 //if service returns true
                 if (result != null) // temporary check will be service function
@@ -50,8 +50,7 @@ namespace API.Controllers
             try
             {
                 // will work once service is aded
-                //var result = balanceService.Instance.BalanceChange(bcDTO.BudgetCategoryID, bcDTO.Amount, bcDTO.Title, bcDTO.Description, bcDTO.Date);
-                var result = true; 
+                var result = BalanceService.Instance.AddChange(bcDTO);
 
                 //if service returns true
                 if (result) // temporary check will be service function
@@ -77,40 +76,7 @@ namespace API.Controllers
                 return BadRequest(ex.Message);
             }
         }
-        [AllowAnonymous]  //change to autorized once that is implemented
-        [HttpDelete]
-        public IActionResult Login(int id)
-        {
-            try
-            {
-                // will work once service is aded
-                //var result = balanceService.Instance.RemoveBalanceChange(id);
-                var result = true;
-
-                //if service returns true
-                if (result) // temporary check will be service function
-                    return Ok(new
-                    {
-                        status = "success",
-                        message = "Change Saved"
-                    });
-                //returns a json objekt with status and user property
-                //always return same format on the object unless an actual error happens
-                else
-                    return Ok(new
-                    {
-                        status = "failure",
-                        message = "Balance Change failed"
-                    });
-                // else return Ok("failure");
-
-            }
-            catch (Exception ex)
-            {
-                //only activates on real errors
-                return BadRequest(ex.Message);
-            }
-        }
+       
 
 
     }

@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DAL.Migrations
 {
-    public partial class addedSeeds : Migration
+    public partial class firsttry : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

@@ -1,8 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
-namespace API.DTO
+namespace SERVICES.DTO
 {
     public record BalanceChangeDTO
     {
+
 
         [Required]
         public int BudgetCategoryID { get; set; }

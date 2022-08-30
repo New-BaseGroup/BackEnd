@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
-using API.DTO;
+using SERVICES.DTO;
 using SERVICES;
 
 namespace API.Controllers
@@ -19,7 +19,7 @@ namespace API.Controllers
                 //try loging service funktion
 
                 //if service returns true
-                if (UserService.Instance.Login(loginDTO.User, loginDTO.Password)) // temporary check will be service function
+                if (UserService.Instance.Login(loginDTO)) // temporary check will be service function
                     return Ok(new
                     {
                         status = "success",
@@ -49,7 +49,7 @@ namespace API.Controllers
         {
             try
             {
-                if (UserService.Instance.RegisterNewAccount(registerUserDTO.User, registerUserDTO.Password, registerUserDTO.Email)) // temporary check if user is registered already  will  be a service function
+                if (UserService.Instance.RegisterNewAccount(registerUserDTO)) // temporary check if user is registered already  will  be a service function
                     return Ok(new
                     {
                         status = "success",
