@@ -10,7 +10,7 @@ namespace API.Controllers
     [ApiController]
     public class BudgetController : ControllerBase
     {
-        [AllowAnonymous] //change to autorized when autentication is implemented
+        [Authorize]
         [HttpPost("GetBudget")]//you should be able to add
         public IActionResult GetBudget( BudgetParametersDTO budgetParametersDTO)
         {
@@ -37,7 +37,7 @@ namespace API.Controllers
             }
         }
 
-        [AllowAnonymous] //will allow anyone to use this endpoint so that u dont have to be loged in to log in ;)
+        [Authorize]
         [HttpGet("{id}", Name = "BudgetById")]
         public IActionResult GetBudgetById(int id)
         {
@@ -73,7 +73,7 @@ namespace API.Controllers
             }
         }
 
-        [AllowAnonymous]
+        [Authorize]
         [HttpPost]
         public IActionResult CreateBudget(CreateBudgetDTO budget)
         {
