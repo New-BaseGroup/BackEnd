@@ -10,6 +10,16 @@ namespace API.Controllers
     [ApiController]
     public class BalanceController : ControllerBase
     {
+        private string UserFromToken()
+        {
+            object value;
+            ControllerContext.HttpContext.Items.TryGetValue("Username", out value);
+
+            var username = value.ToString();
+            if (username != null)
+                return username;
+            return "";
+        }
         [Authorize]
         [HttpGet]
         public IActionResult GetBalanceChange(int id) // get income or expense based on its id

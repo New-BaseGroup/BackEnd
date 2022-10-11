@@ -10,6 +10,16 @@ namespace API.Controllers
     [ApiController]
     public class BudgetController : ControllerBase
     {
+        private string UserFromToken()
+        {
+            object value;
+            ControllerContext.HttpContext.Items.TryGetValue("Username", out value);
+
+            var username = value.ToString();
+            if(username != null)
+            return username;
+            return "";
+        }
         [Authorize]
         [HttpPost("GetBudget")]//you should be able to add
         public IActionResult GetBudget( BudgetParametersDTO budgetParametersDTO)
@@ -43,7 +53,7 @@ namespace API.Controllers
         {
             try
             {
-                
+                var userId = UserService.Instance.GetUserId(UserFromToken());
                var budget = BudgetService.Instance.GetBudgetById(id);
                 //IsEmptyObject
                 if (budget != null)

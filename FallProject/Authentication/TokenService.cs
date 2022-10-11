@@ -27,5 +27,6 @@ namespace API.Authentication
             return new JwtSecurityTokenHandler().WriteToken(tokenDescriptor);
 
         }
+
     }
 }
