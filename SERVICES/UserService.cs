@@ -50,6 +50,19 @@ namespace SERVICES
                 return false;
             }
         }
+        public int GetUserId(string user)
+        {
+            try
+            {
+                using (var db = new BudgetContext())
+                {
+                    var userID = db.Users.First(u => u.Username == user).UserID;
+                    return userID;
+                }
+            }
+            catch { return 0; }
+           
+        }
         public bool RegisterNewAccount(RegisterUserDTO newUser)
         {
             //try

@@ -59,72 +59,72 @@ namespace DAL.Migrations
                         new
                         {
                             BudgetID = 1,
-                            EndDate = new DateTime(2022, 9, 19, 11, 36, 58, 100, DateTimeKind.Local).AddTicks(8297),
+                            EndDate = new DateTime(2022, 10, 23, 14, 8, 44, 894, DateTimeKind.Local).AddTicks(4199),
                             Name = "budgetNr1",
-                            StartDate = new DateTime(2022, 8, 20, 11, 36, 58, 100, DateTimeKind.Local).AddTicks(8267),
+                            StartDate = new DateTime(2022, 9, 23, 14, 8, 44, 894, DateTimeKind.Local).AddTicks(4166),
                             TotalAmount = 40000m,
                             UserID = 1
                         },
                         new
                         {
                             BudgetID = 2,
-                            EndDate = new DateTime(2022, 9, 19, 11, 36, 58, 100, DateTimeKind.Local).AddTicks(8302),
+                            EndDate = new DateTime(2022, 10, 23, 14, 8, 44, 894, DateTimeKind.Local).AddTicks(4206),
                             Name = "budgetNr2",
-                            StartDate = new DateTime(2022, 8, 20, 11, 36, 58, 100, DateTimeKind.Local).AddTicks(8300),
+                            StartDate = new DateTime(2022, 9, 23, 14, 8, 44, 894, DateTimeKind.Local).AddTicks(4205),
                             TotalAmount = 20000m,
                             UserID = 1
                         },
                         new
                         {
                             BudgetID = 3,
-                            EndDate = new DateTime(2022, 9, 19, 11, 36, 58, 100, DateTimeKind.Local).AddTicks(8305),
+                            EndDate = new DateTime(2022, 10, 23, 14, 8, 44, 894, DateTimeKind.Local).AddTicks(4209),
                             Name = "budgetNr1",
-                            StartDate = new DateTime(2022, 8, 20, 11, 36, 58, 100, DateTimeKind.Local).AddTicks(8304),
+                            StartDate = new DateTime(2022, 9, 23, 14, 8, 44, 894, DateTimeKind.Local).AddTicks(4208),
                             TotalAmount = 10000m,
                             UserID = 2
                         },
                         new
                         {
                             BudgetID = 4,
-                            EndDate = new DateTime(2022, 9, 19, 11, 36, 58, 100, DateTimeKind.Local).AddTicks(8308),
+                            EndDate = new DateTime(2022, 10, 23, 14, 8, 44, 894, DateTimeKind.Local).AddTicks(4212),
                             Name = "budgetNr2",
-                            StartDate = new DateTime(2022, 8, 20, 11, 36, 58, 100, DateTimeKind.Local).AddTicks(8306),
+                            StartDate = new DateTime(2022, 9, 23, 14, 8, 44, 894, DateTimeKind.Local).AddTicks(4211),
                             TotalAmount = 10000m,
                             UserID = 2
                         },
                         new
                         {
                             BudgetID = 5,
-                            EndDate = new DateTime(2022, 9, 19, 11, 36, 58, 100, DateTimeKind.Local).AddTicks(8311),
+                            EndDate = new DateTime(2022, 10, 23, 14, 8, 44, 894, DateTimeKind.Local).AddTicks(4215),
                             Name = "budgetNr1",
-                            StartDate = new DateTime(2022, 8, 20, 11, 36, 58, 100, DateTimeKind.Local).AddTicks(8310),
+                            StartDate = new DateTime(2022, 9, 23, 14, 8, 44, 894, DateTimeKind.Local).AddTicks(4214),
                             TotalAmount = 10000m,
                             UserID = 3
                         },
                         new
                         {
                             BudgetID = 6,
-                            EndDate = new DateTime(2022, 9, 19, 11, 36, 58, 100, DateTimeKind.Local).AddTicks(8314),
+                            EndDate = new DateTime(2022, 10, 23, 14, 8, 44, 894, DateTimeKind.Local).AddTicks(4218),
                             Name = "budgetNr2",
-                            StartDate = new DateTime(2022, 8, 20, 11, 36, 58, 100, DateTimeKind.Local).AddTicks(8313),
+                            StartDate = new DateTime(2022, 9, 23, 14, 8, 44, 894, DateTimeKind.Local).AddTicks(4217),
                             TotalAmount = 10000m,
                             UserID = 3
                         },
                         new
                         {
                             BudgetID = 7,
-                            EndDate = new DateTime(2022, 9, 19, 11, 36, 58, 100, DateTimeKind.Local).AddTicks(8317),
+                            EndDate = new DateTime(2022, 10, 23, 14, 8, 44, 894, DateTimeKind.Local).AddTicks(4221),
                             Name = "budgetNr1",
-                            StartDate = new DateTime(2022, 8, 20, 11, 36, 58, 100, DateTimeKind.Local).AddTicks(8316),
+                            StartDate = new DateTime(2022, 9, 23, 14, 8, 44, 894, DateTimeKind.Local).AddTicks(4219),
                             TotalAmount = 10000m,
                             UserID = 4
                         },
                         new
                         {
                             BudgetID = 8,
-                            EndDate = new DateTime(2022, 9, 19, 11, 36, 58, 100, DateTimeKind.Local).AddTicks(8320),
+                            EndDate = new DateTime(2022, 10, 23, 14, 8, 44, 894, DateTimeKind.Local).AddTicks(4223),
                             Name = "budgetNr2",
-                            StartDate = new DateTime(2022, 8, 20, 11, 36, 58, 100, DateTimeKind.Local).AddTicks(8319),
+                            StartDate = new DateTime(2022, 9, 23, 14, 8, 44, 894, DateTimeKind.Local).AddTicks(4222),
                             TotalAmount = 10000m,
                             UserID = 4
                         });
@@ -346,7 +346,7 @@ namespace DAL.Migrations
                             ChangeID = 1,
                             Amount = 11000,
                             BudgetCategoryID = 1,
-                            Date = new DateTime(2022, 8, 30, 11, 36, 58, 100, DateTimeKind.Local).AddTicks(8393),
+                            Date = new DateTime(2022, 10, 3, 14, 8, 44, 894, DateTimeKind.Local).AddTicks(4266),
                             Description = "test Description 1",
                             Title = "income test test1"
                         },
@@ -355,7 +355,7 @@ namespace DAL.Migrations
                             ChangeID = 2,
                             Amount = -2000,
                             BudgetCategoryID = 1,
-                            Date = new DateTime(2022, 8, 30, 11, 36, 58, 100, DateTimeKind.Local).AddTicks(8396),
+                            Date = new DateTime(2022, 10, 3, 14, 8, 44, 894, DateTimeKind.Local).AddTicks(4268),
                             Description = "test Description 1",
                             Title = "income test test2"
                         },
@@ -364,7 +364,7 @@ namespace DAL.Migrations
                             ChangeID = 3,
                             Amount = 30000,
                             BudgetCategoryID = 2,
-                            Date = new DateTime(2022, 8, 30, 11, 36, 58, 100, DateTimeKind.Local).AddTicks(8398),
+                            Date = new DateTime(2022, 10, 3, 14, 8, 44, 894, DateTimeKind.Local).AddTicks(4270),
                             Description = "test Description 1",
                             Title = "income test test3"
                         },
@@ -373,7 +373,7 @@ namespace DAL.Migrations
                             ChangeID = 4,
                             Amount = -1000,
                             BudgetCategoryID = 2,
-                            Date = new DateTime(2022, 8, 30, 11, 36, 58, 100, DateTimeKind.Local).AddTicks(8399),
+                            Date = new DateTime(2022, 10, 3, 14, 8, 44, 894, DateTimeKind.Local).AddTicks(4272),
                             Description = "test Description 1",
                             Title = "income test test4"
                         },
@@ -382,7 +382,7 @@ namespace DAL.Migrations
                             ChangeID = 5,
                             Amount = -2000,
                             BudgetCategoryID = 3,
-                            Date = new DateTime(2022, 8, 30, 11, 36, 58, 100, DateTimeKind.Local).AddTicks(8400),
+                            Date = new DateTime(2022, 10, 3, 14, 8, 44, 894, DateTimeKind.Local).AddTicks(4273),
                             Description = "test Description 1",
                             Title = "income test test5"
                         },
@@ -391,7 +391,7 @@ namespace DAL.Migrations
                             ChangeID = 6,
                             Amount = -3000,
                             BudgetCategoryID = 4,
-                            Date = new DateTime(2022, 8, 30, 11, 36, 58, 100, DateTimeKind.Local).AddTicks(8402),
+                            Date = new DateTime(2022, 10, 3, 14, 8, 44, 894, DateTimeKind.Local).AddTicks(4274),
                             Description = "test Description 1",
                             Title = "income test test6"
                         },
@@ -400,7 +400,7 @@ namespace DAL.Migrations
                             ChangeID = 7,
                             Amount = -3000,
                             BudgetCategoryID = 5,
-                            Date = new DateTime(2022, 8, 30, 11, 36, 58, 100, DateTimeKind.Local).AddTicks(8403),
+                            Date = new DateTime(2022, 10, 3, 14, 8, 44, 894, DateTimeKind.Local).AddTicks(4276),
                             Description = "test Description 1",
                             Title = "income test test7"
                         },
@@ -409,7 +409,7 @@ namespace DAL.Migrations
                             ChangeID = 8,
                             Amount = -3000,
                             BudgetCategoryID = 6,
-                            Date = new DateTime(2022, 8, 30, 11, 36, 58, 100, DateTimeKind.Local).AddTicks(8405),
+                            Date = new DateTime(2022, 10, 3, 14, 8, 44, 894, DateTimeKind.Local).AddTicks(4277),
                             Description = "test Description 1",
                             Title = "income test test8"
                         },
@@ -418,7 +418,7 @@ namespace DAL.Migrations
                             ChangeID = 9,
                             Amount = -3000,
                             BudgetCategoryID = 7,
-                            Date = new DateTime(2022, 8, 30, 11, 36, 58, 100, DateTimeKind.Local).AddTicks(8406),
+                            Date = new DateTime(2022, 10, 3, 14, 8, 44, 894, DateTimeKind.Local).AddTicks(4278),
                             Description = "test Description 1",
                             Title = "income test test9"
                         },
@@ -427,7 +427,7 @@ namespace DAL.Migrations
                             ChangeID = 10,
                             Amount = -3000,
                             BudgetCategoryID = 8,
-                            Date = new DateTime(2022, 8, 30, 11, 36, 58, 100, DateTimeKind.Local).AddTicks(8407),
+                            Date = new DateTime(2022, 10, 3, 14, 8, 44, 894, DateTimeKind.Local).AddTicks(4280),
                             Description = "test Description 1",
                             Title = "income test test10"
                         },
@@ -436,7 +436,7 @@ namespace DAL.Migrations
                             ChangeID = 11,
                             Amount = -3000,
                             BudgetCategoryID = 3,
-                            Date = new DateTime(2022, 8, 30, 11, 36, 58, 100, DateTimeKind.Local).AddTicks(8409),
+                            Date = new DateTime(2022, 10, 3, 14, 8, 44, 894, DateTimeKind.Local).AddTicks(4281),
                             Description = "test Description 1",
                             Title = "income test test11"
                         },
@@ -445,7 +445,7 @@ namespace DAL.Migrations
                             ChangeID = 12,
                             Amount = -3000,
                             BudgetCategoryID = 3,
-                            Date = new DateTime(2022, 8, 30, 11, 36, 58, 100, DateTimeKind.Local).AddTicks(8410),
+                            Date = new DateTime(2022, 10, 3, 14, 8, 44, 894, DateTimeKind.Local).AddTicks(4282),
                             Description = "test Description 1",
                             Title = "income test test12"
                         });

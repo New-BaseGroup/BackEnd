@@ -10,7 +10,17 @@ namespace API.Controllers
     [ApiController]
     public class BalanceController : ControllerBase
     {
-        [AllowAnonymous]  //change to autorized once that is implemented
+        private string UserFromToken()
+        {
+            object value;
+            ControllerContext.HttpContext.Items.TryGetValue("Username", out value);
+
+            var username = value.ToString();
+            if (username != null)
+                return username;
+            return "";
+        }
+        [Authorize]
         [HttpGet]
         public IActionResult GetBalanceChange(int id) // get income or expense based on its id
         {
@@ -43,7 +53,7 @@ namespace API.Controllers
                 return BadRequest(ex.Message);
             }
         }
-        [AllowAnonymous]  //change to autorized once that is implemented
+        [Authorize]
         [HttpPost]
         public IActionResult AddBalance(BalanceChangeDTO bcDTO)
         {

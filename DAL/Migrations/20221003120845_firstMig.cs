@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DAL.Migrations
 {
-    public partial class newseed : Migration
+    public partial class firstMig : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -138,14 +138,14 @@ namespace DAL.Migrations
                 columns: new[] { "BudgetID", "Description", "EndDate", "Name", "StartDate", "TotalAmount", "UserID" },
                 values: new object[,]
                 {
-                    { 1, null, new DateTime(2022, 9, 19, 11, 36, 58, 100, DateTimeKind.Local).AddTicks(8297), "budgetNr1", new DateTime(2022, 8, 20, 11, 36, 58, 100, DateTimeKind.Local).AddTicks(8267), 40000m, 1 },
-                    { 2, null, new DateTime(2022, 9, 19, 11, 36, 58, 100, DateTimeKind.Local).AddTicks(8302), "budgetNr2", new DateTime(2022, 8, 20, 11, 36, 58, 100, DateTimeKind.Local).AddTicks(8300), 20000m, 1 },
-                    { 3, null, new DateTime(2022, 9, 19, 11, 36, 58, 100, DateTimeKind.Local).AddTicks(8305), "budgetNr1", new DateTime(2022, 8, 20, 11, 36, 58, 100, DateTimeKind.Local).AddTicks(8304), 10000m, 2 },
-                    { 4, null, new DateTime(2022, 9, 19, 11, 36, 58, 100, DateTimeKind.Local).AddTicks(8308), "budgetNr2", new DateTime(2022, 8, 20, 11, 36, 58, 100, DateTimeKind.Local).AddTicks(8306), 10000m, 2 },
-                    { 5, null, new DateTime(2022, 9, 19, 11, 36, 58, 100, DateTimeKind.Local).AddTicks(8311), "budgetNr1", new DateTime(2022, 8, 20, 11, 36, 58, 100, DateTimeKind.Local).AddTicks(8310), 10000m, 3 },
-                    { 6, null, new DateTime(2022, 9, 19, 11, 36, 58, 100, DateTimeKind.Local).AddTicks(8314), "budgetNr2", new DateTime(2022, 8, 20, 11, 36, 58, 100, DateTimeKind.Local).AddTicks(8313), 10000m, 3 },
-                    { 7, null, new DateTime(2022, 9, 19, 11, 36, 58, 100, DateTimeKind.Local).AddTicks(8317), "budgetNr1", new DateTime(2022, 8, 20, 11, 36, 58, 100, DateTimeKind.Local).AddTicks(8316), 10000m, 4 },
-                    { 8, null, new DateTime(2022, 9, 19, 11, 36, 58, 100, DateTimeKind.Local).AddTicks(8320), "budgetNr2", new DateTime(2022, 8, 20, 11, 36, 58, 100, DateTimeKind.Local).AddTicks(8319), 10000m, 4 }
+                    { 1, null, new DateTime(2022, 10, 23, 14, 8, 44, 894, DateTimeKind.Local).AddTicks(4199), "budgetNr1", new DateTime(2022, 9, 23, 14, 8, 44, 894, DateTimeKind.Local).AddTicks(4166), 40000m, 1 },
+                    { 2, null, new DateTime(2022, 10, 23, 14, 8, 44, 894, DateTimeKind.Local).AddTicks(4206), "budgetNr2", new DateTime(2022, 9, 23, 14, 8, 44, 894, DateTimeKind.Local).AddTicks(4205), 20000m, 1 },
+                    { 3, null, new DateTime(2022, 10, 23, 14, 8, 44, 894, DateTimeKind.Local).AddTicks(4209), "budgetNr1", new DateTime(2022, 9, 23, 14, 8, 44, 894, DateTimeKind.Local).AddTicks(4208), 10000m, 2 },
+                    { 4, null, new DateTime(2022, 10, 23, 14, 8, 44, 894, DateTimeKind.Local).AddTicks(4212), "budgetNr2", new DateTime(2022, 9, 23, 14, 8, 44, 894, DateTimeKind.Local).AddTicks(4211), 10000m, 2 },
+                    { 5, null, new DateTime(2022, 10, 23, 14, 8, 44, 894, DateTimeKind.Local).AddTicks(4215), "budgetNr1", new DateTime(2022, 9, 23, 14, 8, 44, 894, DateTimeKind.Local).AddTicks(4214), 10000m, 3 },
+                    { 6, null, new DateTime(2022, 10, 23, 14, 8, 44, 894, DateTimeKind.Local).AddTicks(4218), "budgetNr2", new DateTime(2022, 9, 23, 14, 8, 44, 894, DateTimeKind.Local).AddTicks(4217), 10000m, 3 },
+                    { 7, null, new DateTime(2022, 10, 23, 14, 8, 44, 894, DateTimeKind.Local).AddTicks(4221), "budgetNr1", new DateTime(2022, 9, 23, 14, 8, 44, 894, DateTimeKind.Local).AddTicks(4219), 10000m, 4 },
+                    { 8, null, new DateTime(2022, 10, 23, 14, 8, 44, 894, DateTimeKind.Local).AddTicks(4223), "budgetNr2", new DateTime(2022, 9, 23, 14, 8, 44, 894, DateTimeKind.Local).AddTicks(4222), 10000m, 4 }
                 });
 
             migrationBuilder.InsertData(
@@ -172,18 +172,18 @@ namespace DAL.Migrations
                 columns: new[] { "ChangeID", "Amount", "BudgetCategoryID", "Date", "Description", "Title" },
                 values: new object[,]
                 {
-                    { 1, 11000, 1, new DateTime(2022, 8, 30, 11, 36, 58, 100, DateTimeKind.Local).AddTicks(8393), "test Description 1", "income test test1" },
-                    { 2, -2000, 1, new DateTime(2022, 8, 30, 11, 36, 58, 100, DateTimeKind.Local).AddTicks(8396), "test Description 1", "income test test2" },
-                    { 3, 30000, 2, new DateTime(2022, 8, 30, 11, 36, 58, 100, DateTimeKind.Local).AddTicks(8398), "test Description 1", "income test test3" },
-                    { 4, -1000, 2, new DateTime(2022, 8, 30, 11, 36, 58, 100, DateTimeKind.Local).AddTicks(8399), "test Description 1", "income test test4" },
-                    { 5, -2000, 3, new DateTime(2022, 8, 30, 11, 36, 58, 100, DateTimeKind.Local).AddTicks(8400), "test Description 1", "income test test5" },
-                    { 6, -3000, 4, new DateTime(2022, 8, 30, 11, 36, 58, 100, DateTimeKind.Local).AddTicks(8402), "test Description 1", "income test test6" },
-                    { 7, -3000, 5, new DateTime(2022, 8, 30, 11, 36, 58, 100, DateTimeKind.Local).AddTicks(8403), "test Description 1", "income test test7" },
-                    { 8, -3000, 6, new DateTime(2022, 8, 30, 11, 36, 58, 100, DateTimeKind.Local).AddTicks(8405), "test Description 1", "income test test8" },
-                    { 9, -3000, 7, new DateTime(2022, 8, 30, 11, 36, 58, 100, DateTimeKind.Local).AddTicks(8406), "test Description 1", "income test test9" },
-                    { 10, -3000, 8, new DateTime(2022, 8, 30, 11, 36, 58, 100, DateTimeKind.Local).AddTicks(8407), "test Description 1", "income test test10" },
-                    { 11, -3000, 3, new DateTime(2022, 8, 30, 11, 36, 58, 100, DateTimeKind.Local).AddTicks(8409), "test Description 1", "income test test11" },
-                    { 12, -3000, 3, new DateTime(2022, 8, 30, 11, 36, 58, 100, DateTimeKind.Local).AddTicks(8410), "test Description 1", "income test test12" }
+                    { 1, 11000, 1, new DateTime(2022, 10, 3, 14, 8, 44, 894, DateTimeKind.Local).AddTicks(4266), "test Description 1", "income test test1" },
+                    { 2, -2000, 1, new DateTime(2022, 10, 3, 14, 8, 44, 894, DateTimeKind.Local).AddTicks(4268), "test Description 1", "income test test2" },
+                    { 3, 30000, 2, new DateTime(2022, 10, 3, 14, 8, 44, 894, DateTimeKind.Local).AddTicks(4270), "test Description 1", "income test test3" },
+                    { 4, -1000, 2, new DateTime(2022, 10, 3, 14, 8, 44, 894, DateTimeKind.Local).AddTicks(4272), "test Description 1", "income test test4" },
+                    { 5, -2000, 3, new DateTime(2022, 10, 3, 14, 8, 44, 894, DateTimeKind.Local).AddTicks(4273), "test Description 1", "income test test5" },
+                    { 6, -3000, 4, new DateTime(2022, 10, 3, 14, 8, 44, 894, DateTimeKind.Local).AddTicks(4274), "test Description 1", "income test test6" },
+                    { 7, -3000, 5, new DateTime(2022, 10, 3, 14, 8, 44, 894, DateTimeKind.Local).AddTicks(4276), "test Description 1", "income test test7" },
+                    { 8, -3000, 6, new DateTime(2022, 10, 3, 14, 8, 44, 894, DateTimeKind.Local).AddTicks(4277), "test Description 1", "income test test8" },
+                    { 9, -3000, 7, new DateTime(2022, 10, 3, 14, 8, 44, 894, DateTimeKind.Local).AddTicks(4278), "test Description 1", "income test test9" },
+                    { 10, -3000, 8, new DateTime(2022, 10, 3, 14, 8, 44, 894, DateTimeKind.Local).AddTicks(4280), "test Description 1", "income test test10" },
+                    { 11, -3000, 3, new DateTime(2022, 10, 3, 14, 8, 44, 894, DateTimeKind.Local).AddTicks(4281), "test Description 1", "income test test11" },
+                    { 12, -3000, 3, new DateTime(2022, 10, 3, 14, 8, 44, 894, DateTimeKind.Local).AddTicks(4282), "test Description 1", "income test test12" }
                 });
 
             migrationBuilder.CreateIndex(

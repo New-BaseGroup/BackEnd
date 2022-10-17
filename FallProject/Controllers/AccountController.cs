@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using SERVICES.DTO;
 using SERVICES;
+using API.Authentication;
 
 namespace API.Controllers
 {
@@ -10,6 +11,15 @@ namespace API.Controllers
     [ApiController]
     public class AccountController : ControllerBase
     {
+        private readonly ITokenService _tokenService;
+        private readonly IConfiguration _configuration;
+        public AccountController(ITokenService tokenService, IConfiguration config)
+        {
+            _tokenService = tokenService;
+            _configuration = config;
+        }
+
+
         [AllowAnonymous] //will allow anyone to use this endpoint so that u dont have to be loged in to log in ;)
         [HttpPost("login")]
         public IActionResult Login(LoginDTO loginDTO)
@@ -21,12 +31,17 @@ namespace API.Controllers
 
             
                 //if service returns true
-                if (UserService.Instance.Login(loginDTO)) // temporary check will be service function
-                return Ok(new
+                if (UserService.Instance.Login(loginDTO))
                 {
-                    status = "success",
-                    message = loginDTO.User
-                });
+                    var generatedToken = _tokenService.BuildToken(_configuration["Jwt:Key"].ToString(), _configuration["Jwt:Issuer"].ToString(), loginDTO.User);
+                    return Ok(new
+                    {
+                        status = "success",
+                        message = loginDTO.User,
+                        token = generatedToken
+                    });
+                }
+               
             //returns a json objekt with status and user property
             //always return same format on the object unless an actual error happens
             else
