@@ -2,6 +2,8 @@
 using DAL.Models;
 using SERVICES.DTO;
 using SERVICES;
+using Castle.Core.Internal;
+using DAL.ModelExtensions;
 
 namespace SERVICES
 {
@@ -28,6 +30,40 @@ namespace SERVICES
                 return budgets;
             }
         }
+        public List<Budget> GetBudgets(GetBudgetDTO budgetdto)
+        {
+            using (var db = new BudgetContext())
+            {
+                List<Budget> Budgets = new List<Budget>();
+                if(budgetdto.BudgetID != null)                
+                    Budgets.Add(db.Budgets.First(b => b.BudgetID == budgetdto.BudgetID));
+                if (!string.IsNullOrEmpty(budgetdto.CustomeName))
+                    Budgets.Add(db.Budgets.First(b => b.Name == budgetdto.CustomeName));
+                if (budgetdto.StartDate != null && budgetdto.EndDate != null)
+                {
+                    var tempbudget = db.Budgets.Where(b => 
+                        b.StartDate <= budgetdto.StartDate && 
+                        b.StartDate <= budgetdto.EndDate && 
+                        b.EndDate >= budgetdto.EndDate && 
+                        b.EndDate >= budgetdto.StartDate).ToList();
+                    Budgets = (List<Budget>)Budgets.Union(tempbudget);
+                }
+                if(budgetdto.StartDate != null)
+                {
+                    var tempbudget = db.Budgets.Where(b => b.StartDate <= budgetdto.StartDate).ToList();
+                    Budgets = (List<Budget>)Budgets.Union(tempbudget);
+                }
+                if (budgetdto.EndDate != null)
+                {
+                    var tempbudget = db.Budgets.Where(b => b.EndDate >= budgetdto.EndDate).ToList();
+                    Budgets = (List<Budget>)Budgets.Union(tempbudget);
+                }
+               
+                
+                return Budgets;
+
+            }
+        }
         public BudgetDTO GetBudgetById(int budgetID)
         {
             using (var db = new BudgetContext())
@@ -36,8 +72,13 @@ namespace SERVICES
                 var budgetCategories = new List<BudgetCategoriesDTO>();
                 foreach (var item in budget.BudgetCategories)
                 {
-                    
-                    budgetCategories.Add(new BudgetCategoriesDTO() { CatergoriID = item.Category.CategoryID, CustomName = item.CustomName, MaxAmount = item.MaxAmount,BalanceChanges = item.Changes.ToList() });
+
+                    budgetCategories.Add(new BudgetCategoriesDTO() { 
+                        CatergoriID = item.Category.CategoryID,
+                        CustomName = item.CustomName,
+                        MaxAmount = item.MaxAmount,
+                        BalanceChanges = item.Changes.ToList()
+                    });
                 }
 
                 var foundBudget = new BudgetDTO()
@@ -51,13 +92,13 @@ namespace SERVICES
                     BudgetCategories = budgetCategories,
                 };
                 return foundBudget;
-               
+
             }
         }
         public bool CreateBudget(CreateBudgetDTO inputBudget)
         {
             try
-                {
+            {
                 using (var db = new BudgetContext())
                 {
                     var BudgetCategoriesList = new List<BudgetCategory>();
@@ -76,7 +117,7 @@ namespace SERVICES
                     };
 
                     var UserBudget = db.Users.First(u => u.UserID == inputBudget.UserId).Budgets;
-                    
+
                     UserBudget.Add(budget);
                     db.SaveChanges();
                     return true;
@@ -89,36 +130,58 @@ namespace SERVICES
                 Console.WriteLine(ex.Message);
                 return false;
             }
-           
+
         }
-        public void UpdateBudget(int? budgetID, string? BudgetName, int TotalAmount, DateTime StartDate, DateTime EndDate, string? Description)
+        public bool UpdateBudget(GetBudgetDTO budgetDTO)
         {
-            using (var db = new BudgetContext())
+            try
             {
-                var Currentbudget = db.Budgets.Find(budgetID);
-                if (Currentbudget == null)
-                    throw new NullReferenceException($"No Currentbudget found with Id: {budgetID}");
-                if (!string.IsNullOrEmpty(BudgetName))
-                    Currentbudget.Name = BudgetName;
-                if (!string.IsNullOrEmpty(Description))
-                    Currentbudget.Description = Description;
-                if (TotalAmount != null)
-                    Currentbudget.TotalAmount = TotalAmount;
-                if (StartDate != null)
-                    Currentbudget.StartDate = StartDate;
-                if (EndDate != null)
-                    Currentbudget.EndDate = EndDate;
-                db.Budgets.Update(Currentbudget);
-                db.SaveChanges();
+                using (var db = new BudgetContext())
+                {
+                    var Currentbudget = db.Budgets.Find(budgetDTO.BudgetID);
+                    if (Currentbudget == null)
+                        throw new NullReferenceException($"No Currentbudget found with Id: {budgetDTO.BudgetID}");
+                    if (!string.IsNullOrEmpty(budgetDTO.CustomeName))
+                        Currentbudget.Name = budgetDTO.CustomeName;
+                    if (!string.IsNullOrEmpty(budgetDTO.Description))
+                        Currentbudget.Description = budgetDTO.Description;
+                    if (budgetDTO.TotalAmount != null)
+                        Currentbudget.TotalAmount = (int)budgetDTO.TotalAmount;
+                    if (budgetDTO.StartDate != null)
+                        Currentbudget.StartDate = (DateTime)budgetDTO.StartDate;
+                    if (budgetDTO.EndDate != null)
+                        Currentbudget.EndDate = (DateTime)budgetDTO.EndDate;
+                    db.Budgets.Update(Currentbudget);
+                    db.SaveChanges();
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
             }
         }
-        public void DeleteBudget(int budgetID)
+        public bool DeleteBudget(int budgetID)
         {
-            using (var db = new BudgetContext())
+            try
             {
-                var budget = db.Budgets.Find(budgetID);
-                db.Budgets.Remove(budget);
-                db.SaveChanges();
+
+
+                using (var db = new BudgetContext())
+                {
+                    var budget = db.Budgets.Find(budgetID);
+                    db.Budgets.Remove(budget);
+                    db.SaveChanges();
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
             }
         }
     }

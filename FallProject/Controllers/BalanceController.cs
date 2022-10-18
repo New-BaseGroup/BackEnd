@@ -22,34 +22,26 @@ namespace API.Controllers
         }
         [Authorize]
         [HttpGet]
-        public IActionResult GetBalanceChange(int id) // get income or expense based on its id
+        public IActionResult GetBalanceChange(int id) 
         {
             try
             {
-                // will work once service is aded
                 var result = BalanceService.Instance.GetBalanceChange(id);
-
-                //if service returns true
-                if (result != null) // temporary check will be service function
+                if (result != null) 
                     return Ok(new
                     {
                         status = "success",
                         message = result
                     });
-                //returns a json objekt with status and user property
-                //always return same format on the object unless an actual error happens
                 else
                     return Ok(new
                     {
                         status = "failure",
                         message = "Could not find the balance change"
                     });
-                // else return Ok("failure");
-
             }
             catch (Exception ex)
             {
-                //only activates on real errors
                 return BadRequest(ex.Message);
             }
         }
@@ -59,35 +51,75 @@ namespace API.Controllers
         {
             try
             {
-                // will work once service is aded
                 var result = BalanceService.Instance.AddChange(bcDTO);
-
-                //if service returns true
-                if (result) // temporary check will be service function
+                if (result) 
                     return Ok(new
                     {
                         status = "success",
                         message = "Change Saved"
-                    });
-                //returns a json objekt with status and user property
-                //always return same format on the object unless an actual error happens
+                    });              
                 else
                     return Ok(new
                     {
                         status = "failure",
                         message = "Balance Change failed"
                     });
-                // else return Ok("failure");
-
             }
             catch (Exception ex)
             {
-                //only activates on real errors
                 return BadRequest(ex.Message);
             }
         }
-       
+        [Authorize]
+        [HttpDelete]
+        public IActionResult DeleteBalance(int id)
+        {
+            try
+            {
+                var result = BalanceService.Instance.DeleteChange(id);
 
-
+                if (result) 
+                    return Ok(new
+                    {
+                        status = "success",
+                        message = "Change Deleted"
+                    });
+                else
+                    return Ok(new
+                    {
+                        status = "failure",
+                        message = "Balance Change failed"
+                    });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+        [Authorize]
+        [HttpPut]
+        public IActionResult UpdateChange(UpdateChangeDTO changeDTO)
+        {
+            try
+            {
+                var result = BalanceService.Instance.UpdateChange(changeDTO);
+                if (result)
+                    return Ok(new
+                    {
+                        status = "success",
+                        message = "Change Updated"
+                    });
+                else
+                    return Ok(new
+                    {
+                        status = "failure",
+                        message = "Balance Change failed"
+                    });
+            }
+            catch (Exception ez)
+            {
+                return BadRequest(ez.Message);
+            }
+        }
     }
 }

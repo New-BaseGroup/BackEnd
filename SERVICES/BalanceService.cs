@@ -1,5 +1,7 @@
-﻿using DAL;
+﻿using Castle.Core.Internal;
+using DAL;
 using DAL.Models;
+using MailKit;
 using SERVICES.DTO;
 
 namespace SERVICES
@@ -92,5 +94,41 @@ namespace SERVICES
                 return false;
             }
         }
+        public bool UpdateChange(UpdateChangeDTO ChangeDto)
+        {
+            try
+            {
+                using (var context = new BudgetContext())
+                {
+                    var Change = context.Changes.FirstOrDefault(x => x.ChangeID == ChangeDto.ID);
+
+                    if (Change == null)
+                        throw new NullReferenceException($"No Change found with Id: {ChangeDto.ID}");
+
+                    if (!string.IsNullOrEmpty(ChangeDto.Title))
+                        Change.Title = ChangeDto.Title;
+
+                    if (!string.IsNullOrEmpty(ChangeDto.Description))
+                        Change.Description = ChangeDto.Description;
+
+                    if (ChangeDto.Amount != null)
+                        Change.Amount = ChangeDto.Amount.Value;
+
+                    if (ChangeDto.Date != null)
+                        Change.Date = ChangeDto.Date.Value;
+                    context.Changes.Update(Change);
+                    context.SaveChanges();
+                return true;
+
+                }
+                return false;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }         
+        }
+
     }
 }

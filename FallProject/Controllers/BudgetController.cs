@@ -16,37 +16,30 @@ namespace API.Controllers
             ControllerContext.HttpContext.Items.TryGetValue("Username", out value);
 
             var username = value.ToString();
-            if(username != null)
-            return username;
+            if (username != null)
+                return username;
             return "";
         }
         [Authorize]
-        [HttpPost("GetBudget")]//you should be able to add
-        public IActionResult GetBudget( BudgetParametersDTO budgetParametersDTO)
+        [HttpPost("GetBudget")]
+        public IActionResult GetBudget(GetBudgetDTO budgetParametersDTO)
         {
             try
             {
-                //try loging service funktion
+                var budgets = BudgetService.Instance.GetBudgets(budgetParametersDTO);
+                return Ok(new
+                {
+                    status = "success",
+                    message = budgets
+                });
 
-                //if service returns true
-                var budgets = "temp";
-                //service.GetBudgets(budgetParametersDTO); will use the budgetparameters to find budget that match the serach.
-                
-                    return Ok(new
-                    {
-                        status = "success",
-                        message = budgets
-                    });
-                
 
             }
             catch (Exception ex)
             {
-                //only activates on real errors
                 return BadRequest(ex.Message);
             }
         }
-
         [Authorize]
         [HttpGet("{id}", Name = "BudgetById")]
         public IActionResult GetBudgetById(int id)
@@ -54,7 +47,7 @@ namespace API.Controllers
             try
             {
                 var userId = UserService.Instance.GetUserId(UserFromToken());
-               var budget = BudgetService.Instance.GetBudgetById(id);
+                var budget = BudgetService.Instance.GetBudgets(new GetBudgetDTO() { BudgetID = id }).FirstOrDefault();
                 //IsEmptyObject
                 if (budget != null)
                 {
@@ -63,7 +56,6 @@ namespace API.Controllers
                         status = "success",
                         message = budget
                     });
-
                 }
                 else
                     return NotFound(new
@@ -71,14 +63,9 @@ namespace API.Controllers
                         status = "failed",
                         message = "not found"
                     });
-               
-
-              
-
             }
             catch (Exception ex)
             {
-                //only activates on real errors
                 return BadRequest(ex.Message);
             }
         }
@@ -88,9 +75,9 @@ namespace API.Controllers
         public IActionResult CreateBudget(CreateBudgetDTO budget)
         {
             try
-            { //service need to be added.
+            {
                 var result = BudgetService.Instance.CreateBudget(budget);
-               if(result)
+                if (result)
                     return Ok(new
                     {
                         status = "success",
@@ -107,9 +94,60 @@ namespace API.Controllers
             }
             catch (Exception ex)
             {
-                //only activates on real errors
                 return BadRequest(ex.Message);
             }
         }
+        [Authorize]
+        [HttpDelete]
+        public IActionResult DeleteBudget(int id)
+        {
+            try
+            {
+                var result = BudgetService.Instance.DeleteBudget(id);
+
+                if (result)
+                    return Ok(new
+                    {
+                        status = "success",
+                        message = "Budget Deleted"
+                    });
+                else
+                    return Ok(new
+                    {
+                        status = "failure",
+                        message = "Budget failed"
+                    });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+        [Authorize]
+        [HttpPut]
+        public IActionResult UpdateBudget(GetBudgetDTO Budget)
+        {
+            try
+            {
+                var result = BudgetService.Instance.UpdateBudget(Budget);
+                if (result)
+                    return Ok(new
+                    {
+                        status = "success",
+                        message = "Budget Updated"
+                    });
+                else
+                    return Ok(new
+                    {
+                        status = "failure",
+                        message = "Budget failed"
+                    });
+            }
+            catch (Exception ez)
+            {
+                return BadRequest(ez.Message);
+            }
+        }
     }
+
 }

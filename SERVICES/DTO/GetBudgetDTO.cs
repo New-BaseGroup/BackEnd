@@ -1,15 +1,14 @@
 ﻿using System.ComponentModel.DataAnnotations;
 namespace SERVICES.DTO
 {
-    public class BudgetParametersDTO
+    public class GetBudgetDTO
     {
         public DateTime? StartDate { get; set; }
         public DateTime? EndDate { get; set; }
         public string? CustomeName { get; set; }
-        public string? user { get; set; }
-        public int? BudgetId { get; set; }
-
-
+        public int? BudgetID { get; set; }
+        public int? TotalAmount { get; set; }
+        public string? Description { get; set; }
 
 
     }
