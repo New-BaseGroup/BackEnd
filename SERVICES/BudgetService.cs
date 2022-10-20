@@ -22,47 +22,55 @@ namespace SERVICES
             }
         }
         private BudgetService() { }
-        public ICollection<Budget> ListAllBudgets(int UserID)
+        public ICollection<GetBudgetDTO> ListAllBudgets(int UserID)
         {
             using (var db = new BudgetContext())
             {
-                var budgets = db.Users.First(u => u.UserID == UserID).Budgets;
-                return budgets;
+                var AllUserBudgets = new List<GetBudgetDTO>(); ;
+                foreach (Budget item in db.Users.First(u => u.UserID == UserID).Budgets)
+                {
+                    var budgetDTO = new GetBudgetDTO()
+                    {
+                        BudgetID = item.BudgetID,
+                        CustomeName = item.Name,
+                        TotalAmount = item.TotalAmount,
+                        Description = item.Description,
+                        StartDate = item.StartDate,
+                        EndDate = item.EndDate
+                    };
+                    AllUserBudgets.Add(budgetDTO);
+                }
+                return AllUserBudgets;
             }
         }
-        public List<Budget> GetBudgets(GetBudgetDTO budgetdto)
+        public List<GetBudgetDTO> GetBudgets(GetBudgetDTO inputBudgetInfo)
         {
-            using (var db = new BudgetContext())
+            var AllUserBudgets = ListAllBudgets(inputBudgetInfo.UserID);
+            var Budgets = new List<GetBudgetDTO>();
+            if (inputBudgetInfo.BudgetID != null)
+                Budgets.Add(AllUserBudgets.First(b => b.BudgetID == inputBudgetInfo.BudgetID));
+            if (!string.IsNullOrEmpty(inputBudgetInfo.CustomeName))
+                Budgets.Add(AllUserBudgets.First(b => b.CustomeName == inputBudgetInfo.CustomeName));
+            if (inputBudgetInfo.StartDate != null && inputBudgetInfo.EndDate != null)
             {
-                List<Budget> Budgets = new List<Budget>();
-                if(budgetdto.BudgetID != null)                
-                    Budgets.Add(db.Budgets.First(b => b.BudgetID == budgetdto.BudgetID));
-                if (!string.IsNullOrEmpty(budgetdto.CustomeName))
-                    Budgets.Add(db.Budgets.First(b => b.Name == budgetdto.CustomeName));
-                if (budgetdto.StartDate != null && budgetdto.EndDate != null)
-                {
-                    var tempbudget = db.Budgets.Where(b => 
-                        b.StartDate <= budgetdto.StartDate && 
-                        b.StartDate <= budgetdto.EndDate && 
-                        b.EndDate >= budgetdto.EndDate && 
-                        b.EndDate >= budgetdto.StartDate).ToList();
-                    Budgets = (List<Budget>)Budgets.Union(tempbudget);
-                }
-                if(budgetdto.StartDate != null)
-                {
-                    var tempbudget = db.Budgets.Where(b => b.StartDate <= budgetdto.StartDate).ToList();
-                    Budgets = (List<Budget>)Budgets.Union(tempbudget);
-                }
-                if (budgetdto.EndDate != null)
-                {
-                    var tempbudget = db.Budgets.Where(b => b.EndDate >= budgetdto.EndDate).ToList();
-                    Budgets = (List<Budget>)Budgets.Union(tempbudget);
-                }
-               
-                
-                return Budgets;
-
+                var tempbudget = AllUserBudgets.Where(b =>
+                    b.StartDate <= inputBudgetInfo.StartDate &&
+                    b.StartDate <= inputBudgetInfo.EndDate &&
+                    b.EndDate >= inputBudgetInfo.EndDate &&
+                    b.EndDate >= inputBudgetInfo.StartDate).ToList();
+                Budgets = Budgets.Union(tempbudget).ToList();
             }
+            if (inputBudgetInfo.StartDate != null)
+            {
+                var tempbudget = AllUserBudgets.Where(b => b.StartDate <= inputBudgetInfo.StartDate).ToList();
+                Budgets = Budgets.Union(tempbudget).ToList();
+            }
+            if (inputBudgetInfo.EndDate != null)
+            {
+                var tempbudget = AllUserBudgets.Where(b => b.EndDate >= inputBudgetInfo.EndDate).ToList();
+                Budgets = Budgets.Union(tempbudget).ToList();
+            }
+            return Budgets;
         }
         public BudgetDTO GetBudgetById(int budgetID)
         {
@@ -73,7 +81,8 @@ namespace SERVICES
                 foreach (var item in budget.BudgetCategories)
                 {
 
-                    budgetCategories.Add(new BudgetCategoriesDTO() { 
+                    budgetCategories.Add(new BudgetCategoriesDTO()
+                    {
                         CatergoriID = item.Category.CategoryID,
                         CustomName = item.CustomName,
                         MaxAmount = item.MaxAmount,
@@ -86,8 +95,8 @@ namespace SERVICES
                     BudgetID = budget.BudgetID,
                     Name = budget.Name,
                     TotalAmount = budget.TotalAmount,
-                    StartDate = budget.StartDate,
-                    EndDate = budget.EndDate,
+                    StartDate = DateOnly.FromDateTime(budget.StartDate.Date),
+                    EndDate = DateOnly.FromDateTime(budget.EndDate),
                     Description = budget.Description,
                     BudgetCategories = budgetCategories,
                 };
@@ -104,7 +113,12 @@ namespace SERVICES
                     var BudgetCategoriesList = new List<BudgetCategory>();
                     foreach (var item in inputBudget.BudgetCategories)
                     {
-                        BudgetCategoriesList.Add(new BudgetCategory() { CustomName = item.CustomName, MaxAmount = item.MaxAmount, Category = db.Categories.First(c => c.CategoryID == item.CatergoriID) });
+                        BudgetCategoriesList.Add(new BudgetCategory()
+                        {
+                            CustomName = item.CustomName,
+                            MaxAmount = item.MaxAmount,
+                            Category = db.Categories.First(c => c.CategoryID == item.CatergoriID)
+                        });
                     }
                     var budget = new Budget()
                     {
@@ -167,8 +181,6 @@ namespace SERVICES
         {
             try
             {
-
-
                 using (var db = new BudgetContext())
                 {
                     var budget = db.Budgets.Find(budgetID);

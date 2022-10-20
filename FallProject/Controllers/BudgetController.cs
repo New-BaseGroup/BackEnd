@@ -47,8 +47,8 @@ namespace API.Controllers
             try
             {
                 var userId = UserService.Instance.GetUserId(UserFromToken());
-                var budget = BudgetService.Instance.GetBudgets(new GetBudgetDTO() { BudgetID = id }).FirstOrDefault();
-                //IsEmptyObject
+                //var budget = BudgetService.Instance.GetBudgets(new GetBudgetDTO() { BudgetID = id }).FirstOrDefault();               
+                var budget = BudgetService.Instance.GetBudgetById(id);               
                 if (budget != null)
                 {
                     return Ok(new
@@ -99,12 +99,13 @@ namespace API.Controllers
         }
         [Authorize]
         [HttpDelete]
-        public IActionResult DeleteBudget(int id)
+        public async Task<IActionResult> DeleteBudget(int id)
         {
             try
             {
+                // An error occurred while saving the entity changes.
                 var result = BudgetService.Instance.DeleteBudget(id);
-
+                
                 if (result)
                     return Ok(new
                     {

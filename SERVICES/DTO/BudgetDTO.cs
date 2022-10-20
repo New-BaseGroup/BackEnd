@@ -11,9 +11,9 @@ namespace SERVICES.DTO
         [Required]
         public int TotalAmount { get; init; }
         [Required]
-        public DateTime StartDate { get; init; }
+        public DateOnly StartDate { get; init; }
         [Required]
-        public DateTime EndDate { get; init; }
+        public DateOnly EndDate { get; init; }
 
         public string? Description { get; init; }
 

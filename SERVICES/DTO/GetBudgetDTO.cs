@@ -9,8 +9,7 @@ namespace SERVICES.DTO
         public int? BudgetID { get; set; }
         public int? TotalAmount { get; set; }
         public string? Description { get; set; }
-
-
+        public int UserID { get; set; }
     }
 }
  
