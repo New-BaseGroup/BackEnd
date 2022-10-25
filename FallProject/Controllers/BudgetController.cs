@@ -22,11 +22,25 @@ namespace API.Controllers
         }
         [Authorize]
         [HttpPost("GetBudget")]
-        public IActionResult GetBudget(GetBudgetDTO budgetParametersDTO)
+        public IActionResult GetBudget(GetBudgetDTO GetBudgetDTO)
         {
             try
             {
-                var budgets = BudgetService.Instance.GetBudgets(budgetParametersDTO);
+                var userId = UserService.Instance.GetUserId(UserFromToken());
+                var budgets = BudgetService.Instance.GetBudgets(GetBudgetDTO, userId);
+                if(GetBudgetDTO.GetAllMetaData)
+                {
+                    var budgetList = new List<BudgetDTO>();
+                    foreach (var b in budgets)
+                    {
+                        budgetList.Add(BudgetService.Instance.GetBudgetById((int)b.BudgetID));
+                    }
+                    return Ok(new
+                    {
+                        status = "success",
+                        message = budgetList
+                    });
+                }
                 return Ok(new
                 {
                     status = "success",

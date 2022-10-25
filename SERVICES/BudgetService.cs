@@ -43,9 +43,10 @@ namespace SERVICES
                 return AllUserBudgets;
             }
         }
-        public List<GetBudgetDTO> GetBudgets(GetBudgetDTO inputBudgetInfo)
+        public List<GetBudgetDTO> GetBudgets(GetBudgetDTO inputBudgetInfo, int UserId)
         {
-            var AllUserBudgets = ListAllBudgets(inputBudgetInfo.UserID);
+            var AllUserBudgets = ListAllBudgets(UserId);
+            Console.WriteLine();
             var Budgets = new List<GetBudgetDTO>();
             if (inputBudgetInfo.BudgetID != null)
                 Budgets.Add(AllUserBudgets.First(b => b.BudgetID == inputBudgetInfo.BudgetID));
@@ -54,9 +55,9 @@ namespace SERVICES
             if (inputBudgetInfo.StartDate != null && inputBudgetInfo.EndDate != null)
             {
                 var tempbudget = AllUserBudgets.Where(b =>
-                    b.StartDate <= inputBudgetInfo.StartDate &&
+                    b.StartDate >= inputBudgetInfo.StartDate &&
                     b.StartDate <= inputBudgetInfo.EndDate &&
-                    b.EndDate >= inputBudgetInfo.EndDate &&
+                    b.EndDate <= inputBudgetInfo.EndDate &&
                     b.EndDate >= inputBudgetInfo.StartDate).ToList();
                 Budgets = Budgets.Union(tempbudget).ToList();
             }
@@ -70,6 +71,7 @@ namespace SERVICES
                 var tempbudget = AllUserBudgets.Where(b => b.EndDate >= inputBudgetInfo.EndDate).ToList();
                 Budgets = Budgets.Union(tempbudget).ToList();
             }
+            
             return Budgets;
         }
         public BudgetDTO GetBudgetById(int budgetID)
@@ -95,8 +97,8 @@ namespace SERVICES
                     BudgetID = budget.BudgetID,
                     Name = budget.Name,
                     TotalAmount = budget.TotalAmount,
-                    StartDate = DateOnly.FromDateTime(budget.StartDate.Date),
-                    EndDate = DateOnly.FromDateTime(budget.EndDate),
+                    StartDate = budget.StartDate,
+                    EndDate = budget.EndDate,
                     Description = budget.Description,
                     BudgetCategories = budgetCategories,
                 };
