@@ -55,6 +55,27 @@ namespace API.Controllers
             }
         }
         [Authorize]
+        [HttpGet("GetCategory")]
+        public IActionResult GetCategory()
+        {
+            try
+            {
+              
+                var categories = BudgetService.Instance.GetCategorys();
+                return Ok(new
+                {
+                    status = "success",
+                    message = categories
+                });
+
+
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+        [Authorize]
         [HttpGet("{id}", Name = "BudgetById")]
         public IActionResult GetBudgetById(int id)
         {

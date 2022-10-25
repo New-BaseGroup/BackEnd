@@ -22,6 +22,13 @@ namespace SERVICES
             }
         }
         private BudgetService() { }
+        public List<DAL.Models.Category> GetCategorys()
+        {
+            using (var db = new BudgetContext())
+            {
+                return db.Categories.ToList();
+            }
+        }
         public ICollection<GetBudgetDTO> ListAllBudgets(int UserID)
         {
             using (var db = new BudgetContext())
