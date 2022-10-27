@@ -16,37 +16,65 @@ namespace API.Controllers
             ControllerContext.HttpContext.Items.TryGetValue("Username", out value);
 
             var username = value.ToString();
-            if(username != null)
-            return username;
+            if (username != null)
+                return username;
             return "";
         }
         [Authorize]
-        [HttpPost("GetBudget")]//you should be able to add
-        public IActionResult GetBudget( BudgetParametersDTO budgetParametersDTO)
+        [HttpPost("GetBudget")]
+        public IActionResult GetBudget(GetBudgetDTO GetBudgetDTO)
         {
             try
             {
-                //try loging service funktion
-
-                //if service returns true
-                var budgets = "temp";
-                //service.GetBudgets(budgetParametersDTO); will use the budgetparameters to find budget that match the serach.
-                
+                var userId = UserService.Instance.GetUserId(UserFromToken());
+                var budgets = BudgetService.Instance.GetBudgets(GetBudgetDTO, userId);
+                if(GetBudgetDTO.GetAllMetaData)
+                {
+                    var budgetList = new List<BudgetDTO>();
+                    foreach (var b in budgets)
+                    {
+                        budgetList.Add(BudgetService.Instance.GetBudgetById((int)b.BudgetID));
+                    }
                     return Ok(new
                     {
                         status = "success",
-                        message = budgets
+                        message = budgetList
                     });
-                
+                }
+                return Ok(new
+                {
+                    status = "success",
+                    message = budgets
+                });
+
 
             }
             catch (Exception ex)
             {
-                //only activates on real errors
                 return BadRequest(ex.Message);
             }
         }
+        [Authorize]
+        [HttpGet("GetCategory")]
+        public IActionResult GetCategory()
+        {
+            try
+            {
+              
+                var categories = BudgetService.Instance.GetCategorys();
+                return Ok(new
+                {
+                    status = "success",
+                    message = categories
+                });
 
+
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
         [Authorize]
         [HttpGet("{id}", Name = "BudgetById")]
         public IActionResult GetBudgetById(int id)
@@ -54,8 +82,8 @@ namespace API.Controllers
             try
             {
                 var userId = UserService.Instance.GetUserId(UserFromToken());
-               var budget = BudgetService.Instance.GetBudgetById(id);
-                //IsEmptyObject
+                //var budget = BudgetService.Instance.GetBudgets(new GetBudgetDTO() { BudgetID = id }).FirstOrDefault();               
+                var budget = BudgetService.Instance.GetBudgetById(id);               
                 if (budget != null)
                 {
                     return Ok(new
@@ -63,7 +91,6 @@ namespace API.Controllers
                         status = "success",
                         message = budget
                     });
-
                 }
                 else
                     return NotFound(new
@@ -71,14 +98,9 @@ namespace API.Controllers
                         status = "failed",
                         message = "not found"
                     });
-               
-
-              
-
             }
             catch (Exception ex)
             {
-                //only activates on real errors
                 return BadRequest(ex.Message);
             }
         }
@@ -88,9 +110,9 @@ namespace API.Controllers
         public IActionResult CreateBudget(CreateBudgetDTO budget)
         {
             try
-            { //service need to be added.
+            {
                 var result = BudgetService.Instance.CreateBudget(budget);
-               if(result)
+                if (result)
                     return Ok(new
                     {
                         status = "success",
@@ -107,9 +129,61 @@ namespace API.Controllers
             }
             catch (Exception ex)
             {
-                //only activates on real errors
                 return BadRequest(ex.Message);
             }
         }
+        [Authorize]
+        [HttpDelete]
+        public async Task<IActionResult> DeleteBudget(int id)
+        {
+            try
+            {
+                // An error occurred while saving the entity changes.
+                var result = BudgetService.Instance.DeleteBudget(id);
+                
+                if (result)
+                    return Ok(new
+                    {
+                        status = "success",
+                        message = "Budget Deleted"
+                    });
+                else
+                    return Ok(new
+                    {
+                        status = "failure",
+                        message = "Budget failed"
+                    });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+        [Authorize]
+        [HttpPut]
+        public IActionResult UpdateBudget(GetBudgetDTO Budget)
+        {
+            try
+            {
+                var result = BudgetService.Instance.UpdateBudget(Budget);
+                if (result)
+                    return Ok(new
+                    {
+                        status = "success",
+                        message = "Budget Updated"
+                    });
+                else
+                    return Ok(new
+                    {
+                        status = "failure",
+                        message = "Budget failed"
+                    });
+            }
+            catch (Exception ez)
+            {
+                return BadRequest(ez.Message);
+            }
+        }
     }
+
 }
