@@ -2,17 +2,15 @@
 using DAL.Models;
 namespace SERVICES.DTO
 {
-    public class BudgetCategoriesDTO
+    public class NewBudgetCategoriesDTO
     {
- 
+
         [Required]
-        public int CatergoriID { get; set; }
+        public int CategoryID { get; set; }
         public string CustomName { get; set; }
 
         [Required]
         public int MaxAmount { get; init; }
 
-        public List<Change>? BalanceChanges { get; set; }
     }
 }
- 

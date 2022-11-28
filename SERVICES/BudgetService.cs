@@ -4,6 +4,7 @@ using SERVICES.DTO;
 using SERVICES;
 using Castle.Core.Internal;
 using DAL.ModelExtensions;
+using MimeKit.Cryptography;
 
 namespace SERVICES
 {
@@ -81,11 +82,29 @@ namespace SERVICES
             
             return Budgets;
         }
+        public Dictionary<int,string> getBudgetList(int userId)
+        {
+            var returnList = new Dictionary<int, string>();
+            using (var db = new BudgetContext())
+            {
+                var user = db.Users.First(u => u.UserID == userId);
+                if (!user.Budgets.Any())
+                    return returnList;
+
+                foreach (var item in user.Budgets)
+                {
+                    returnList.Add(item.BudgetID, item.Name);
+                }
+                return returnList;
+            }
+
+
+        }
         public BudgetDTO GetBudgetById(int budgetID)
         {
             using (var db = new BudgetContext())
             {
-                var budget = db.Budgets.First(b => b.BudgetID == budgetID);
+                var budget = db.Budgets.First(b => b.BudgetID == budgetID);   
                 var budgetCategories = new List<BudgetCategoriesDTO>();
                 foreach (var item in budget.BudgetCategories)
                 {
@@ -123,12 +142,13 @@ namespace SERVICES
                     foreach (var item in inputBudget.BudgetCategories)
                     {
                         BudgetCategoriesList.Add(new BudgetCategory()
-                        {
+                       {
                             CustomName = item.CustomName,
                             MaxAmount = item.MaxAmount,
-                            Category = db.Categories.First(c => c.CategoryID == item.CatergoriID)
+                            Category = db.Categories.First(c => c.CategoryID == item.CategoryID)
                         });
                     }
+
                     var budget = new Budget()
                     {
                         Name = inputBudget.BudgetName,

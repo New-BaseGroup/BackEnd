@@ -21,7 +21,7 @@ namespace SERVICES.DTO
         public int UserId { get; set; }
 
         [Required]
-        public ICollection<BudgetCategoriesDTO> BudgetCategories{ get; init;}
+        public ICollection<NewBudgetCategoriesDTO> BudgetCategories{ get; init;}
     }
 }
  

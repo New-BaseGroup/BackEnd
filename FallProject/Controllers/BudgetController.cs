@@ -76,6 +76,34 @@ namespace API.Controllers
             }
         }
         [Authorize]
+        [HttpGet("budgetList")]
+        public IActionResult GetBudgetList()
+        {
+            try
+            {
+                var userId = UserService.Instance.GetUserId(UserFromToken());
+                var budgetList = BudgetService.Instance.getBudgetList(userId);
+                if (budgetList != null)
+                {
+                    return Ok(new
+                    {
+                        status = "success",
+                        message = budgetList
+                    });
+                }
+                else
+                    return NotFound(new
+                    {
+                        status = "failed",
+                        message = "not found"
+                    });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+        [Authorize]
         [HttpGet("{id}", Name = "BudgetById")]
         public IActionResult GetBudgetById(int id)
         {
@@ -111,6 +139,8 @@ namespace API.Controllers
         {
             try
             {
+                var userId = UserService.Instance.GetUserId(UserFromToken());
+                budget.UserId = userId;
                 var result = BudgetService.Instance.CreateBudget(budget);
                 if (result)
                     return Ok(new
