@@ -100,5 +100,54 @@ namespace SERVICES
             //    return false;
             //}
         }
+        public ICollection<Widget> getAllWidgets(int UserID)
+        {
+            using (var db = new BudgetContext())
+            {
+                var AllUserBudgets = new List<Widget>(); ;
+                foreach (Widget item in db.Users.First(u => u.UserID == UserID).Widgets)
+                {
+                    var widget = new Widget()
+                    {
+                        WidgetID = item.WidgetID,
+                        Header = item.Header,
+                        Data = item.Data,
+                    };
+                    AllUserBudgets.Add(widget);
+                }
+                return AllUserBudgets;
+            }
+        }
+        public bool SaveWidgets(List<WidgetDTO> inputWidgets, int UserID)
+        {
+            try
+            {
+                using (var db = new BudgetContext())
+                {
+                    var WidgetList = new List<Widget>();
+                    var UserWidgets = db.Users.First(u => u.UserID == UserID).Widgets;
+                    foreach (var item in inputWidgets)
+                    {
+                        WidgetList.Add(new Widget()
+                        {
+                            Header = item.Header,
+                            Data = item.Data,
+                        });
+                    }
+                    Console.WriteLine(WidgetList);
+                    UserWidgets = WidgetList;
+                    db.SaveChanges();
+                    return true;
+                }
+                return false;
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+
+        }
     }
 }

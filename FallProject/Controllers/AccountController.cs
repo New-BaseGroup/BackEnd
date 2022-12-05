@@ -19,7 +19,16 @@ namespace API.Controllers
             _configuration = config;
         }
 
+        private string UserFromToken()
+        {
+            object value;
+            ControllerContext.HttpContext.Items.TryGetValue("Username", out value);
 
+            var username = value.ToString();
+            if (username != null)
+                return username;
+            return "";
+        }
         [AllowAnonymous] //will allow anyone to use this endpoint so that u dont have to be loged in to log in ;)
         [HttpPost("login")]
         public IActionResult Login(LoginDTO loginDTO)
@@ -110,6 +119,59 @@ namespace API.Controllers
             catch (Exception ex)
             {
                 //only activates on real errors
+                return BadRequest(ex.Message);
+            }
+        }
+        [Authorize]
+        [HttpGet("Widgets")]
+        public IActionResult GetWidgets()
+        {
+            try
+            {
+                var userID = UserService.Instance.GetUserId(UserFromToken());
+                var widgets = UserService.Instance.getAllWidgets(userID);
+                return Ok(new
+                {
+                    status = "success",
+                    message = widgets
+                });
+
+
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+        [Authorize]
+        [HttpPost("Widgets")]
+        public IActionResult SaveWidgets(List<WidgetDTO> widgets)
+        {
+            try
+            {
+                var userID = UserService.Instance.GetUserId(UserFromToken());
+                var result = UserService.Instance.SaveWidgets(widgets, userID);
+                if (result)
+                {
+                    return Ok(new
+                    {
+                        status = "success",
+                        message = "Widgets Saved"
+                    });
+                } else
+                {
+                    return Ok(new
+                    {
+                        status = "success",
+                        message = "Widgets not saved"
+                    });
+                }
+
+
+
+            }
+            catch (Exception ex)
+            {
                 return BadRequest(ex.Message);
             }
         }

@@ -21,6 +21,7 @@ namespace DAL.Models
         [StringLength(150, MinimumLength = 1)]
         public string Password { get; set; }
         public virtual ICollection<Budget>? Budgets { get; set; }
+        public virtual ICollection<Widget>? Widgets { get; set; }
 
     }
 }
