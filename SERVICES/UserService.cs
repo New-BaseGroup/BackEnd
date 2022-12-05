@@ -125,7 +125,7 @@ namespace SERVICES
                 using (var db = new BudgetContext())
                 {
                     var WidgetList = new List<Widget>();
-                    var UserWidgets = db.Users.First(u => u.UserID == UserID).Widgets;
+                    var User = db.Users.First(u => u.UserID == UserID);
                     foreach (var item in inputWidgets)
                     {
                         WidgetList.Add(new Widget()
@@ -134,8 +134,8 @@ namespace SERVICES
                             Data = item.Data,
                         });
                     }
-                    Console.WriteLine(WidgetList);
-                    UserWidgets = WidgetList;
+
+                    User.Widgets = WidgetList;
                     db.SaveChanges();
                     return true;
                 }
