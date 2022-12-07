@@ -11,7 +11,11 @@ namespace SERVICES.DTO
     {
         [Required]
         public string Header { get; set; }
+
         [Required]
         public string Data { get; set; }
+
+        [Required]
+        public int Position { get; set; }
     }
 }

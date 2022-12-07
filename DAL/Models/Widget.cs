@@ -16,6 +16,7 @@ namespace DAL.Models
         public string Header { get; set; }
 
         public string Data { get; set; }
+        public int Position { get; set; }
 
     }
 }

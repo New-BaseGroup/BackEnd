@@ -132,6 +132,7 @@ namespace SERVICES
                         {
                             Header = item.Header,
                             Data = item.Data,
+                            Position = item.Position,
                         });
                     }
 
