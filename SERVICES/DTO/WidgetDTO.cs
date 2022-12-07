@@ -9,6 +9,7 @@ namespace SERVICES.DTO
 {
     public class WidgetDTO
     {
+        public int? WidgetID { get; set; }
         [Required]
         public string Header { get; set; }
 

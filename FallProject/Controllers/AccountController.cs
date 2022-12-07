@@ -151,18 +151,18 @@ namespace API.Controllers
             {
                 var userID = UserService.Instance.GetUserId(UserFromToken());
                 var result = UserService.Instance.SaveWidgets(widgets, userID);
-                if (result)
+                if (result != null)
                 {
                     return Ok(new
                     {
                         status = "success",
-                        message = "Widgets Saved"
+                        message = result,
                     });
                 } else
                 {
                     return Ok(new
                     {
-                        status = "success",
+                        status = "failure",
                         message = "Widgets not saved"
                     });
                 }

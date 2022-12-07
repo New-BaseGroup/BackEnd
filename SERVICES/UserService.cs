@@ -1,6 +1,8 @@
 ﻿using DAL;
+using DAL.Migrations;
 using DAL.Models;
 using SERVICES.DTO;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
 
@@ -118,7 +120,7 @@ namespace SERVICES
                 return AllUserBudgets;
             }
         }
-        public bool SaveWidgets(List<WidgetDTO> inputWidgets, int UserID)
+        public List<Widget> SaveWidgets(List<WidgetDTO> inputWidgets, int UserID)
         {
             try
             {
@@ -128,25 +130,39 @@ namespace SERVICES
                     var User = db.Users.First(u => u.UserID == UserID);
                     foreach (var item in inputWidgets)
                     {
-                        WidgetList.Add(new Widget()
+                        if(item.WidgetID == null)
                         {
-                            Header = item.Header,
-                            Data = item.Data,
-                            Position = item.Position,
-                        });
+                            WidgetList.Add(new Widget()
+                            {
+                                Header = item.Header,
+                                Data = item.Data,
+                                Position = item.Position,
+                            });
+                        }
+                        else
+                        {
+                            WidgetList.Add(new Widget()
+                            {
+                                WidgetID = (int)item.WidgetID,
+                                Header = item.Header,
+                                Data = item.Data,
+                                Position = item.Position,
+                            });
+                        }
+                       
                     }
 
                     User.Widgets = WidgetList;
                     db.SaveChanges();
-                    return true;
+                    return WidgetList;
                 }
-                return false;
+                
 
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                return false;
+                return null;
             }
 
         }
