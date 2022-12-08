@@ -114,6 +114,7 @@ namespace SERVICES
                         WidgetID = item.WidgetID,
                         Header = item.Header,
                         Data = item.Data,
+                        Position = item.Position,
                     };
                     AllUserBudgets.Add(widget);
                 }
